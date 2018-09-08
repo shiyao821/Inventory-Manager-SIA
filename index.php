@@ -133,6 +133,10 @@ ul {
 	width:100%;
 	overflow: hidden;
 }
+.qty{
+	padding-right: 5px;
+	float:right;
+}
 
 </style>
 
@@ -159,9 +163,9 @@ ul {
 								<span>Incoming Flights</span>
 							</div>
 							<div id="inc-flight-menu" class="wrapper hidden">
-								<div class="flight entry">SQ979</div>
-								<div class="flight entry">SQ990</div>
-								<div class="flight entry">SQ981</div>
+								<div class="flight entry">SQ979<span class="qty">12345</span></div>
+								<div class="flight entry">SQ990<span class="qty">1235</span></div>
+								<div class="flight entry">SQ981<span class="qty">145</span></div>
 							</div>
 						</div>
 						<div class="outgoing dropdown_wrapper">
@@ -258,7 +262,7 @@ $('#taskbar').load("ajaxtest.php", function(responseTxt, statusTxt, xhr){
 	$('#taskbar').append("<br>respondTxt: "+ responseTxt + "<br>statusTxt: " + statusTxt);
 });
 
-$.get("ajaxtest.php", function()
+//$.get("ajaxtest.php", function()
 
 function toggleDrawer(id) {
   $("#"+id).slideToggle(600, "easeOutQuint");

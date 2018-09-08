@@ -3,8 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "inv_mgmt";
+$dbname = "test";
 
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-?>
