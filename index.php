@@ -1,7 +1,5 @@
-<?php 
-//YES PHP WORKS
-	include 'dbt.php';
-
+<?php
+include('dbt.php');
 ?>
 
 <html>
@@ -25,6 +23,7 @@
 body{
 margin:0px;
 padding:0px;
+background-color:rgb(65, 79, 104);
 }
 p{
 	margin:0px;
@@ -41,12 +40,11 @@ p{
 }
 
 #content{
-	background-color:orange;
+	
 	width:100vw;
 }
 
-#taskbar{
-	background-color:rgb(65, 79, 104);
+#taskbar{);
 	color:rgb(235, 238, 244);
 	width:100vw;
 	height:15vh;
@@ -137,6 +135,11 @@ ul {
 	padding-right: 5px;
 	float:right;
 }
+.printbox{
+	float:left;
+	height:100%;
+	border: dashed 1px white;
+}
 
 </style>
 
@@ -151,11 +154,13 @@ ul {
 -->
 <div id="content">
 	<div id="taskbar">
+	<div class="printbox">Printbox1</div>
 	</div>
 	<div id="interface">
 		<div class="box" id="base_cont">
 			<div class="header mid">Bases</div>
 				<div class="row_container_base">
+				
 					<div class="base">
 						<div class="header mid">Singapore</div>
 						<div class="incoming dropdown_wrapper">
@@ -198,10 +203,10 @@ ul {
 									<span>Cutlery</span>
 								</div>
 								<div id="cutlery-menu" class="wrapper hidden">
-									<div class="entry">Spoons</div>
-									<div class="entry">Forks</div>
-									<div class="entry">Knives</div>
-									<div class="entry">Dessert Spoons</div>
+									<div class="entry">Spoons<span class="qty">12345</span></div>
+									<div class="entry">Forks<span class="qty">12345</span></div>
+									<div class="entry">Knives<span class="qty">12345</span></div>
+									<div class="entry">Dessert Spoons<span class="qty">12345</span></div>
 								</div>
 							</div>
 							<div class="dropdown_wrapper">
@@ -218,15 +223,7 @@ ul {
 							
 						</div>
 					</div>
-				
-					<div class="base"></div>
-					<div class="base"></div>
 				</div>
-				<div class="row_container_base">
-				</div>
-				<div class="row_container_base">
-				</div>
-			<div class="base"></div>
 		</div>
 		<div class="box" id="incoming_cont">
 			<div class="header mid">Ongoing Flights</div>
@@ -243,32 +240,92 @@ ul {
 </div>
 
 <script type="text/javascript">
-//alert("asdfas");
-
-var ajaxtest = new XMLHttpRequest();
-ajaxtest.onreadystatechange = function() {
-	if (this.readyState == 4 && this.status == 200) {
-		$('#taskbar').html(statusText);
-	} else {
-		$('#taskbar').html("request not succesful?");
-	}
-};
-
-
-ajaxtest.open("GET", "ajaxtest.php", true);
-ajaxtest.send();
-
-$('#taskbar').load("ajaxtest.php", function(responseTxt, statusTxt, xhr){
-	$('#taskbar').append("<br>respondTxt: "+ responseTxt + "<br>statusTxt: " + statusTxt);
-});
-
-//$.get("ajaxtest.php", function()
-
 function toggleDrawer(id) {
-  $("#"+id).slideToggle(600, "easeOutQuint");
-};
+	  $("#"+id).slideToggle(600, "easeOutQuint");
+	};
+$(document).ready(function() {
+	$.get("ajaxtest.php", function(responseTxt, statusTxt, xhr){
+		$('#taskbar').append("<div class='printbox'>respondTxt: <br>"+ responseTxt + "<br>statusTxt: " + statusTxt+ "</div>");
+	});
+	
+	$.get("dbt.php", function(data, status){
+		
+		$('#taskbar').append("<div class='printbox'>Retrieved from dbt: <br>"+data+"</div>");
+	});
 
+	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
 
+	for (var i = 0; i <location_array.length; i++) {
+		$('#base_cont').append('<div class="base"><div class="header mid">'+location_array[i]+'</div></div>');
+	};
+/*
+<div class="base">
+	<div class="header mid">Singapore</div>
+	<div class="incoming dropdown_wrapper">
+		<div class="header" onclick="toggleDrawer('inc-flight-menu')">
+			<span>Incoming Flights</span>
+		</div>
+		<div id="inc-flight-menu" class="wrapper hidden">
+			<div class="flight entry">SQ979<span class="qty">12345</span></div>
+			<div class="flight entry">SQ990<span class="qty">1235</span></div>
+			<div class="flight entry">SQ981<span class="qty">145</span></div>
+		</div>
+	</div>
+	<div class="outgoing dropdown_wrapper">
+		<div class="header" onclick="toggleDrawer('out-flight-menu')">
+			<span>Outgoing Flights</span>
+		</div>
+		<div id="out-flight-menu" class="wrapper hidden">
+			<div class="flight entry">SQ979</div>
+			<div class="flight entry">SQ990</div>
+			<div class="flight entry">SQ981</div>
+		</div>
+	</div>
+	<div class="dropdown_wrapper">
+		<div class="header">
+			<span>Base Inventory</span>
+		</div>
+		
+		<div class="dropdown_wrapper">
+			<div class="header" onclick="toggleDrawer('crockery-menu')">
+				<span>Crockery</span>
+			</div>
+			<div id="crockery-menu" class="wrapper hidden">
+				<div class="entry">Size A Plates</div>
+				<div class="entry">Size B Plates</div>
+				<div class="entry">Size A Bowls</div>
+			</div>
+		</div>
+		<div class="dropdown_wrapper">
+			<div class="header" onclick="toggleDrawer('cutlery-menu')">
+				<span>Cutlery</span>
+			</div>
+			<div id="cutlery-menu" class="wrapper hidden">
+				<div class="entry">Spoons<span class="qty">12345</span></div>
+				<div class="entry">Forks<span class="qty">12345</span></div>
+				<div class="entry">Knives<span class="qty">12345</span></div>
+				<div class="entry">Dessert Spoons<span class="qty">12345</span></div>
+			</div>
+		</div>
+		<div class="dropdown_wrapper">
+			<div class="header" onclick="toggleDrawer('foodset-menu')">
+				<span>Food Sets</span>
+			</div>
+			<div id="foodset-menu" class="wrapper hidden">
+				<div class="entry">Business Cl - Chicken</div>
+				<div class="entry">Business Cl - Beef</div>
+				<div class="entry">Economy Cl - Chicken</div>
+				<div class="entry">Economy Cl - Fish</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+*/
+	
+	
+});
 </script>
 
 </body>
