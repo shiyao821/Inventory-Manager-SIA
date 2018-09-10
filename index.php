@@ -244,19 +244,22 @@ function toggleDrawer(id) {
 	  $("#"+id).slideToggle(600, "easeOutQuint");
 	};
 $(document).ready(function() {
+	//printbox2
 	$.get("ajaxtest.php", function(responseTxt, statusTxt, xhr){
 		$('#taskbar').append("<div class='printbox'>respondTxt: <br>"+ responseTxt + "<br>statusTxt: " + statusTxt+ "</div>");
 	});
 	
+	//printbox3
 	$.get("dbt.php", function(data, status){
-		
 		$('#taskbar').append("<div class='printbox'>Retrieved from dbt: <br>"+data+"</div>");
 	});
 
+	//constructor
 	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
+	var html_base = '<div class="base"><div class="header mid">'+location_array[i]+'</div></div>';
 
 	for (var i = 0; i <location_array.length; i++) {
-		$('#base_cont').append('<div class="base"><div class="header mid">'+location_array[i]+'</div></div>');
+		$('#base_cont').append(html_base);
 	};
 /*
 <div class="base">
