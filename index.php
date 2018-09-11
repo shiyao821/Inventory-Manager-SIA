@@ -237,12 +237,9 @@ ul {
 </div>
 <div id="footer">
 	<p>Inventory Management System - Proposed by YOND</p>
-
+</div>
 
 <script type="text/javascript">
-// function toggleDrawer(id) {
-// 	  $("#"+id).slideToggle(600, "easeOutQuint");
-// };
 
 function toggleDrawer(clicked) {
 	$(clicked).next().slideToggle(600, "easeOutQuint");
