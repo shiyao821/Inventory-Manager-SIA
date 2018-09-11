@@ -1,5 +1,5 @@
 <?php
-include('dbt.php');
+include('dbt2.php');
 ?>
 
 <html>
@@ -131,14 +131,14 @@ ul {
 	width:100%;
 	overflow: hidden;
 }
-.qty{
-	padding-right: 5px;
-	float:right;
-}
 .printbox{
 	float:left;
 	height:100%;
 	border: dashed 1px white;
+}
+.qty{
+	padding-right: 5px;
+	float:right;
 }
 
 </style>
@@ -164,20 +164,20 @@ ul {
 					<div class="base">
 						<div class="header mid">Singapore</div>
 						<div class="incoming dropdown_wrapper">
-							<div class="header" onclick="toggleDrawer('inc-flight-menu')">
+							<div class="header" onclick="toggleDrawer(this)">
 								<span>Incoming Flights</span>
 							</div>
-							<div id="inc-flight-menu" class="wrapper hidden">
+							<div class="inc_flight_menu wrapper hidden">
 								<div class="flight entry">SQ979<span class="qty">12345</span></div>
 								<div class="flight entry">SQ990<span class="qty">1235</span></div>
 								<div class="flight entry">SQ981<span class="qty">145</span></div>
 							</div>
 						</div>
 						<div class="outgoing dropdown_wrapper">
-							<div class="header" onclick="toggleDrawer('out-flight-menu')">
+							<div class="header" onclick="toggleDrawer(this)">
 								<span>Outgoing Flights</span>
 							</div>
-							<div id="out-flight-menu" class="wrapper hidden">
+							<div class="wrapper hidden">
 								<div class="flight entry">SQ979</div>
 								<div class="flight entry">SQ990</div>
 								<div class="flight entry">SQ981</div>
@@ -189,20 +189,20 @@ ul {
 							</div>
 							
 							<div class="dropdown_wrapper">
-								<div class="header" onclick="toggleDrawer('crockery-menu')">
+								<div class="header" onclick="toggleDrawer(this)">
 									<span>Crockery</span>
 								</div>
-								<div id="crockery-menu" class="wrapper hidden">
+								<div class="wrapper hidden">
 									<div class="entry">Size A Plates</div>
 									<div class="entry">Size B Plates</div>
 									<div class="entry">Size A Bowls</div>
 								</div>
 							</div>
 							<div class="dropdown_wrapper">
-								<div class="header" onclick="toggleDrawer('cutlery-menu')">
+								<div class="header" onclick="toggleDrawer(this)">
 									<span>Cutlery</span>
 								</div>
-								<div id="cutlery-menu" class="wrapper hidden">
+								<div class="wrapper hidden">
 									<div class="entry">Spoons<span class="qty">12345</span></div>
 									<div class="entry">Forks<span class="qty">12345</span></div>
 									<div class="entry">Knives<span class="qty">12345</span></div>
@@ -210,10 +210,10 @@ ul {
 								</div>
 							</div>
 							<div class="dropdown_wrapper">
-								<div class="header" onclick="toggleDrawer('foodset-menu')">
+								<div class="header" onclick="toggleDrawer(this)">
 									<span>Food Sets</span>
 								</div>
-								<div id="foodset-menu" class="wrapper hidden">
+								<div class="wrapper hidden">
 									<div class="entry">Business Cl - Chicken</div>
 									<div class="entry">Business Cl - Beef</div>
 									<div class="entry">Economy Cl - Chicken</div>
@@ -237,12 +237,18 @@ ul {
 </div>
 <div id="footer">
 	<p>Inventory Management System - Proposed by YOND</p>
-</div>
+
 
 <script type="text/javascript">
-function toggleDrawer(id) {
-	  $("#"+id).slideToggle(600, "easeOutQuint");
-	};
+// function toggleDrawer(id) {
+// 	  $("#"+id).slideToggle(600, "easeOutQuint");
+// };
+
+function toggleDrawer(clicked) {
+	$(clicked).next().slideToggle(600, "easeOutQuint");
+	  //alert($(this));
+};
+
 $(document).ready(function() {
 	//printbox2
 	$.get("ajaxtest.php", function(responseTxt, statusTxt, xhr){
@@ -250,82 +256,34 @@ $(document).ready(function() {
 	});
 	
 	//printbox3
-	$.get("dbt.php", function(data, status){
-		$('#taskbar').append("<div class='printbox'>Retrieved from dbt: <br>"+data+"</div>");
+	$.get("dbt2.php", function(data, status){
+		$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+data+"</div>");
 	});
 
-	//constructor
+	//load base names into javascript array
 	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
-	var html_base = '<div class="base"><div class="header mid">'+location_array[i]+'</div></div>';
-
+	
+	//Constructor for bases
 	for (var i = 0; i <location_array.length; i++) {
+
+		var data = <?php echo mysqli_query($link, $query2);?>
+		alert(data);
+
+		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden"> <div class="flight entry">SQ979</div> <div class="flight entry">SQ990</div> <div class="flight entry">SQ981</div> </div> </div>'
+		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden"><div class="flight entry">SQ979<span class="qty">12345</span></div><div class="flight entry">SQ990<span class="qty">1235</span></div><div class="flight entry">SQ981<span class="qty">145</span></div></div></div>';
+
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates</div> <div class="entry">Size B Plates</div> <div class="entry">Size A Bowls</div> </div> </div>';
+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="qty">12345</span></div> <div class="entry">Forks<span class="qty">12345</span></div> <div class="entry">Knives<span class="qty">12345</span></div> <div class="entry">Dessert Spoons<span class="qty">12345</span></div> </div> </div>';
+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken</div> <div class="entry">Business Cl - Beef</div> <div class="entry">Economy Cl - Chicken</div> <div class="entry">Economy Cl - Fish</div> </div> </div>';
+
+		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+ crockery_menu+cutlery_menu + food_menu+'</div>';
+
+		var html_base = '<div class="base"><div class="header mid">'+location_array[i]+'</div>'+inc_flight_menu+out_flight_menu+base_inv_menu+'</div>';
+
 		$('#base_cont').append(html_base);
 	};
-/*
-<div class="base">
-	<div class="header mid">Singapore</div>
-	<div class="incoming dropdown_wrapper">
-		<div class="header" onclick="toggleDrawer('inc-flight-menu')">
-			<span>Incoming Flights</span>
-		</div>
-		<div id="inc-flight-menu" class="wrapper hidden">
-			<div class="flight entry">SQ979<span class="qty">12345</span></div>
-			<div class="flight entry">SQ990<span class="qty">1235</span></div>
-			<div class="flight entry">SQ981<span class="qty">145</span></div>
-		</div>
-	</div>
-	<div class="outgoing dropdown_wrapper">
-		<div class="header" onclick="toggleDrawer('out-flight-menu')">
-			<span>Outgoing Flights</span>
-		</div>
-		<div id="out-flight-menu" class="wrapper hidden">
-			<div class="flight entry">SQ979</div>
-			<div class="flight entry">SQ990</div>
-			<div class="flight entry">SQ981</div>
-		</div>
-	</div>
-	<div class="dropdown_wrapper">
-		<div class="header">
-			<span>Base Inventory</span>
-		</div>
-		
-		<div class="dropdown_wrapper">
-			<div class="header" onclick="toggleDrawer('crockery-menu')">
-				<span>Crockery</span>
-			</div>
-			<div id="crockery-menu" class="wrapper hidden">
-				<div class="entry">Size A Plates</div>
-				<div class="entry">Size B Plates</div>
-				<div class="entry">Size A Bowls</div>
-			</div>
-		</div>
-		<div class="dropdown_wrapper">
-			<div class="header" onclick="toggleDrawer('cutlery-menu')">
-				<span>Cutlery</span>
-			</div>
-			<div id="cutlery-menu" class="wrapper hidden">
-				<div class="entry">Spoons<span class="qty">12345</span></div>
-				<div class="entry">Forks<span class="qty">12345</span></div>
-				<div class="entry">Knives<span class="qty">12345</span></div>
-				<div class="entry">Dessert Spoons<span class="qty">12345</span></div>
-			</div>
-		</div>
-		<div class="dropdown_wrapper">
-			<div class="header" onclick="toggleDrawer('foodset-menu')">
-				<span>Food Sets</span>
-			</div>
-			<div id="foodset-menu" class="wrapper hidden">
-				<div class="entry">Business Cl - Chicken</div>
-				<div class="entry">Business Cl - Beef</div>
-				<div class="entry">Economy Cl - Chicken</div>
-				<div class="entry">Economy Cl - Fish</div>
-			</div>
-		</div>
-		
-	</div>
-</div>
-
-*/
 	
 	
 });
