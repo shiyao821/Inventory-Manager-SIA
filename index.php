@@ -1,6 +1,6 @@
-<?php
-include('dbt2.php');
-?>
+<!-- <?php
+	include('dbt2.php');
+?> -->
 
 <html>
 
@@ -245,6 +245,7 @@ function toggleDrawer(clicked) {
 	$(clicked).next().slideToggle(600, "easeOutQuint");
 	  //alert($(this));
 };
+alert('w');
 
 $(document).ready(function() {
 	//printbox2
@@ -259,14 +260,17 @@ $(document).ready(function() {
 
 	//load base names into javascript array
 	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
+	//var location_array = [<?php json_encode($location_array)?>];
+	$('#taskbar').append("<div class='printbox'>Test: <br>"+location_array+"<br>"+location_array.length+"</div>");
 	
+	//load location details into js array
+	//var location_details = 
+
 	//Constructor for bases
 	for (var i = 0; i <location_array.length; i++) {
 
-		var data = <?php echo mysqli_query($link, $query2);?>
-		alert(data);
+		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden"> <div class="flight entry">SQ979</div> <div class="flight entry">SQ990</div> <div class="flight entry">SQ981</div> </div> </div>';
 
-		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden"> <div class="flight entry">SQ979</div> <div class="flight entry">SQ990</div> <div class="flight entry">SQ981</div> </div> </div>'
 		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden"><div class="flight entry">SQ979<span class="qty">12345</span></div><div class="flight entry">SQ990<span class="qty">1235</span></div><div class="flight entry">SQ981<span class="qty">145</span></div></div></div>';
 
 		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates</div> <div class="entry">Size B Plates</div> <div class="entry">Size A Bowls</div> </div> </div>';

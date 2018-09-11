@@ -10,7 +10,7 @@ $link = mysqli_connect($servername, $username, $password, $dbname);
 if (mysqli_connect_error()) {
 	die("Error connecting to database");
 } else {
-	//echo "Connection a SUCCESS!<br>";
+	echo "Connection a SUCCESS!<br>";
 }
 //SELECT location, quantity FROM inv_mgmt WHERE location_type = flight
 
