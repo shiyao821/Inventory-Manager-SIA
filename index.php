@@ -161,6 +161,9 @@ ul {
 			<div class="header mid">Bases</div>
 				<div class="row_container_base">
 				
+		<?php echo construct_bases() ?>
+		<!--TEMPLATE for BASE 
+
 					<div class="base">
 						<div class="header mid">Singapore</div>
 						<div class="incoming dropdown_wrapper">
@@ -223,8 +226,12 @@ ul {
 							
 						</div>
 					</div>
+				-->
 				</div>
+
 		</div>
+		
+
 		<div class="box" id="incoming_cont">
 			<div class="header mid">Ongoing Flights</div>
 
@@ -261,33 +268,6 @@ $(document).ready(function() {
 	//load base names into javascript array
 	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
 	$('#taskbar').append("<div class='printbox'>Test: <br>"+location_array+"<br>"+location_array.length+"</div>");
-	
-	//load location details into js array
-	/*
-	var location_details = [<?php echo ''?>];
-	//unsuccessful attempt
-	$('#taskbar').append("<div class='printbox'>Test: <br>"+"<br>"+location_details+"</div>");
-*/
-
-	//Constructor for bases
-	for (var i = 0; i <location_array.length; i++) {
-
-		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden"> <div class="flight entry">SQ979</div> <div class="flight entry">SQ990</div> <div class="flight entry">SQ981</div> </div> </div>';
-
-		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden"><div class="flight entry">SQ979<span class="qty">12345</span></div><div class="flight entry">SQ990<span class="qty">1235</span></div><div class="flight entry">SQ981<span class="qty">145</span></div></div></div>';
-
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates</div> <div class="entry">Size B Plates</div> <div class="entry">Size A Bowls</div> </div> </div>';
-
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="qty">12345</span></div> <div class="entry">Forks<span class="qty">12345</span></div> <div class="entry">Knives<span class="qty">12345</span></div> <div class="entry">Dessert Spoons<span class="qty">12345</span></div> </div> </div>';
-
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken</div> <div class="entry">Business Cl - Beef</div> <div class="entry">Economy Cl - Chicken</div> <div class="entry">Economy Cl - Fish</div> </div> </div>';
-
-		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+ crockery_menu+cutlery_menu + food_menu+'</div>';
-
-		var html_base = '<div class="base"><div class="header mid">'+location_array[i]+'</div>'+inc_flight_menu+out_flight_menu+base_inv_menu+'</div>';
-
-		$('#base_cont').append(html_base);
-	};
 	
 	
 });
