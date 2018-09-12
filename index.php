@@ -198,6 +198,11 @@ function toggleDrawer(clicked) {
 	  //alert($(this));
 };
 
+function flight_entry_redirect(flight_no) {
+	toggleDrawer($('#'+flight_no+'_inv_drawer'));
+	//alert('clicked');
+};
+
 $(document).ready(function() {
 	//printbox2
 	$.get("dbt2.php", function(data, status){

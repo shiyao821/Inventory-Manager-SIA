@@ -31,7 +31,7 @@ function construct_bases() {
 					} else {
 						while ($flight_row = mysqli_fetch_array($inc_flight_result)) {
 							//print_r($flight_row);
-							$inc_flight_div = $inc_flight_div.'<div class="flight entry">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_origin'].'</span></div>';
+							$inc_flight_div = $inc_flight_div.'<div class="flight entry" onclick="flight_entry_redirect(\''.$flight_row['flight_no'].'\')">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_origin'].'</span></div>';
 						}
 					}
 				}
@@ -46,7 +46,7 @@ function construct_bases() {
 					} else {
 						while ($flight_row = mysqli_fetch_array($out_flight_result)) {
 							//print_r($flight_row);
-							$out_flight_div = $out_flight_div.'<div class="flight entry">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_destination'].'</span></div>';
+							$out_flight_div = $out_flight_div.'<div class="flight entry" onclick="flight_entry_redirect(\''.$flight_row['flight_no'].'\')">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_destination'].'</span></div>';
 						}
 					}
 				}
@@ -112,7 +112,7 @@ function construct_airborne() {
 
 				$food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="qty">'.$row['busi_chicken'].'</span></div> <div class="entry">Business Cl - Beef<span class="qty">'.$row['busi_beef'].'</span></div> <div class="entry">Economy Cl - Chicken<span class="qty">'.$row['econ_chicken'].'</span></div> <div class="entry">Economy Cl - Fish<span class="qty">'.$row['econ_fish'].'</span></div> </div> </div>';
 
-				$flight_inv_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Flight Inventory</span></div><div class="wrapper hidden">'.
+				$flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'.$row['flight_no'].'_inv_drawer" class="header" onclick="toggleDrawer(this)"> <span>Flight Inventory</span></div><div class="wrapper hidden">'.
 						$crockery_menu.
 						$cutlery_menu.
 						$food_menu.
@@ -160,7 +160,7 @@ function construct_landed() {
 
 				$food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="qty">'.$row['busi_chicken'].'</span></div> <div class="entry">Business Cl - Beef<span class="qty">'.$row['busi_beef'].'</span></div> <div class="entry">Economy Cl - Chicken<span class="qty">'.$row['econ_chicken'].'</span></div> <div class="entry">Economy Cl - Fish<span class="qty">'.$row['econ_fish'].'</span></div> </div> </div>';
 
-				$flight_inv_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Flight Inventory</span></div><div class="wrapper hidden">'.
+				$flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'.$row['flight_no'].'_inv_drawer" class="header" onclick="toggleDrawer(this)"> <span>Flight Inventory</span></div><div class="wrapper hidden">'.
 						$crockery_menu.
 						$cutlery_menu.
 						$food_menu.
