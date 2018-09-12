@@ -22,9 +22,38 @@ function construct_bases() {
 
 			if ($row['location_type'] == 'base')	{
 
-				$out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden"> <div class="flight entry">SQ979</div> <div class="flight entry">SQ990</div> <div class="flight entry">SQ981</div> </div> </div>';
+				$inc_flight_query = "SELECT `flight_no`, `flight_origin` FROM `inv_mgmt2` WHERE `flight_destination` = '".$row['location']."'";
+				$inc_flight_div = "";
+				if ($inc_flight_result = mysqli_query($link, $inc_flight_query)) {
+					//echo "query success";
+					if (mysqli_num_rows($inc_flight_result) == 0) {
+						$inc_flight_div = '<div class="flight entry mid">no incoming flights</div>';
+					} else {
+						while ($flight_row = mysqli_fetch_array($inc_flight_result)) {
+							//print_r($flight_row);
+							$inc_flight_div = $inc_flight_div.'<div class="flight entry">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_origin'].'</span></div>';
+						}
+					}
+				}
+				//echo $inc_flight_div;
 
-				$inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden"><div class="flight entry">SQ979<span class="qty">12345</span></div><div class="flight entry">SQ990<span class="qty">1235</span></div><div class="flight entry">SQ981<span class="qty">145</span></div></div></div>';
+				$out_flight_query = "SELECT `flight_no`, `flight_destination` FROM `inv_mgmt2` WHERE `flight_destination` != 'nil' AND `location` = '".$row['location']."'";
+				$out_flight_div = "";
+				if ($out_flight_result = mysqli_query($link, $out_flight_query)) {
+					//echo "query success";
+					if (mysqli_num_rows($out_flight_result) == 0) {
+						$out_flight_div = '<div class="flight entry mid">no outgoing flights</div>';
+					} else {
+						while ($flight_row = mysqli_fetch_array($out_flight_result)) {
+							//print_r($flight_row);
+							$out_flight_div = $out_flight_div.'<div class="flight entry">'.$flight_row['flight_no'].'<span class="qty">'.$flight_row['flight_destination'].'</span></div>';
+						}
+					}
+				}
+
+				$out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden">'.$out_flight_div.'</div> </div>';
+
+				$inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden">'.$inc_flight_div.'</div></div>';
 
 				$crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="qty">'.$row['size_a_plates'].'</span></div> <div class="entry">Size B Plates<span class="qty">'.$row['size_b_plates'].'</span></div> <div class="entry">Size A Bowls<span class="qty">'.$row['size_a_bowls'].'</span></div> </div> </div>';
 
@@ -51,6 +80,8 @@ function construct_bases() {
 		}
 	}
 };
+
+
 
 function construct_airborne() {
 	$servername = "localhost";
