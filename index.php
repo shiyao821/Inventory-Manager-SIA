@@ -88,20 +88,24 @@ p{
 	width:37vw;
 }
 .header{
-	display: block;
-	margin:auto;
 	border: solid 1px gray;
 	line-height:2vw;
-	
+	text-align:center;
 }
 .mid {
 	text-align:center;
+}
+
+.dest_display{
+	line-height:2vw;
+	text-align: center;
+	border: solid 1px gray;
 }
 .base{
 	background-color:rgb(235, 238, 244);
 	margin: 0.5vw;
 	width: 14vw;
-	min-height: 20vh;
+	min-height: 10vh;
 	float: left;
 }
 .dropdown_wrapper{
@@ -117,13 +121,7 @@ p{
 	border-bottom: 1px dashed gray;
 }
 
-.dropdown_wrapper > .header {
-	padding-left: 8px;
-}
 
-.dropdown_wrapper > .dropdown_wrapper > .header{
-	padding-left: 16px;
-}
 .flight {
 	background-color:rgb(200, 238, 230);
 	line-height:2vw;
@@ -179,10 +177,11 @@ p{
 		<div class="interface_cell">
 			<div class="box" id="incoming_cont">
 				<div class="header mid">Ongoing Flights</div>
-
+				<?php echo construct_airborne() ?>
 			</div>
 			<div class="box" id="outgoing_cont">
 				<div class="header mid">Preparing for Take Off</div>
+				<?php echo construct_landed() ?>
 			</div>
 		</div>
 	</div>
