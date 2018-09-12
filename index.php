@@ -240,12 +240,12 @@ ul {
 </div>
 
 <script type="text/javascript">
+alert('javascript working');
 
 function toggleDrawer(clicked) {
 	$(clicked).next().slideToggle(600, "easeOutQuint");
 	  //alert($(this));
 };
-alert('w');
 
 $(document).ready(function() {
 	//printbox2
@@ -260,11 +260,14 @@ $(document).ready(function() {
 
 	//load base names into javascript array
 	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
-	//var location_array = [<?php json_encode($location_array)?>];
 	$('#taskbar').append("<div class='printbox'>Test: <br>"+location_array+"<br>"+location_array.length+"</div>");
 	
 	//load location details into js array
-	//var location_details = 
+	/*
+	var location_details = [<?php echo ''?>];
+	//unsuccessful attempt
+	$('#taskbar').append("<div class='printbox'>Test: <br>"+"<br>"+location_details+"</div>");
+*/
 
 	//Constructor for bases
 	for (var i = 0; i <location_array.length; i++) {
