@@ -201,18 +201,9 @@ function toggleDrawer(clicked) {
 
 $(document).ready(function() {
 	//printbox2
-	$.get("ajaxtest.php", function(responseTxt, statusTxt, xhr){
-		$('#taskbar').append("<div class='printbox'>respondTxt: <br>"+ responseTxt + "<br>statusTxt: " + statusTxt+ "</div>");
-	});
-	
-	//printbox3
 	$.get("dbt2.php", function(data, status){
 		$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+data+"</div>");
 	});
-
-	//load base names into javascript array
-	var location_array = [<?php echo '"'.implode('","', $location_array).'"' ?>];
-	$('#taskbar').append("<div class='printbox'>Test: <br>"+location_array+"<br>"+location_array.length+"</div>");
 	
 	
 });

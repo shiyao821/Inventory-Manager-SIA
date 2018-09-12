@@ -1,14 +1,5 @@
 <?php
 
-$link = mysqli_connect($servername, $username, $password, $dbname);
-
-if (mysqli_connect_error()) {
-	die("Error connecting to database" . mysqli_connect_error());
-} else {
-	echo "Connection a SUCCESS!<br>";
-}
-
-
 //constructing using PHP
 function construct_bases() {
 	$servername = "localhost";
@@ -16,6 +7,13 @@ function construct_bases() {
 	$password = "";
 	$dbname = "test";
 	$link = mysqli_connect($servername, $username, $password, $dbname);
+
+		if (mysqli_connect_error()) {
+			die("Error connecting to database" . mysqli_connect_error());
+		} else {
+			echo "Connection a SUCCESS!<br>";
+		}
+	
 	$query2 = "SELECT * FROM `inv_mgmt2`";
 
 	if ($result = mysqli_query($link, $query2)) {
@@ -46,5 +44,6 @@ function construct_bases() {
 	}
 };
 
+echo "printbox test";
 
 ?>
