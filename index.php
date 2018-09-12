@@ -21,14 +21,13 @@
 }
 
 body{
-	margin:0px;
-	padding:0px;
-	background-color:rgb(65, 79, 104);
-	overflow-x:hidden;
+margin:0px;
+padding:0px;
+background-color:rgb(65, 79, 104);
 }
 p{
 	margin:0px;
-}
+}x-fast
 
 #logPnl{
 	background-color:rgb(65, 79, 104);
@@ -41,51 +40,41 @@ p{
 }
 
 #content{
+	
 	width:100vw;
 }
 
 #taskbar{);
 	color:rgb(235, 238, 244);
 	width:100vw;
-	height:70px;
+	height:15vh;
 	top:0vh;
 }
 
 #interface{
-	position: absolute;
 	background-color:grey;
 	width:100vw;
-	min-height:85vh;
-	display: table-row;
+	height:85vh;
 }
-
-.interface_cell{
-	display: table-cell;
-	background-color: white;
-	padding-bottom: 30px;
-}
-
 .box{
 	background-color:white;
+	position: absolute;
 	top:16vh;
-	padding-bottom: 30px;
+	width:49vw;
+	border:solid 1px black;
 }
 
 #base_cont{
-	min-height:80vh;
-	width:62vw;
+	height:80vh;
 }
-
 #incoming_cont{
-	min-height:35vh;
-	left: 63vw;
-	width:37vw;
+	height:40vh;
+	left: 50vw;
 }
 #outgoing_cont{
-	min-height:35vh;
-	left:63vw;
-	top: 50%;
-	width:37vw;
+	height:40vh;
+	left:50vw;
+	top: 56vh;
 }
 .header{
 	display: block;
@@ -100,7 +89,7 @@ p{
 .base{
 	background-color:rgb(235, 238, 244);
 	margin: 0.5vw;
-	width: 14vw;
+	width: 15vw;
 	min-height: 20vh;
 	float: left;
 }
@@ -117,12 +106,8 @@ p{
 	border-bottom: 1px dashed gray;
 }
 
-.dropdown_wrapper > .header {
-	padding-left: 8px;
-}
-
 .dropdown_wrapper > .dropdown_wrapper > .header{
-	padding-left: 16px;
+	padding-left: 8px;
 }
 .flight {
 	background-color:rgb(200, 238, 230);
@@ -134,7 +119,11 @@ p{
 .outgoing{
 	background-color:rgb(238, 100, 200);
 }
-
+ul {
+	margin: 0;
+	list-style-type: none;
+	padding: 0;
+}
 .hidden{
   display: none;
 }
@@ -168,22 +157,88 @@ p{
 	<div class="printbox">Printbox1</div>
 	</div>
 	<div id="interface">
-		<div class="interface_cell">
-			<div class="box" id="base_cont">
-				<div class="header mid">Bases</div>
-					<div class="row_container_base">
-					<?php echo construct_bases() ?>
-					</div>
-				</div>
-		</div>
-		<div class="interface_cell">
-			<div class="box" id="incoming_cont">
-				<div class="header mid">Ongoing Flights</div>
+		<div class="box" id="base_cont">
+			<div class="header mid">Bases</div>
+				<div class="row_container_base">
+				
+		<?php echo construct_bases() ?>
+		<!--TEMPLATE for BASE 
 
-			</div>
-			<div class="box" id="outgoing_cont">
-				<div class="header mid">Preparing for Take Off</div>
-			</div>
+					<div class="base">
+						<div class="header mid">Singapore</div>
+						<div class="incoming dropdown_wrapper">
+							<div class="header" onclick="toggleDrawer(this)">
+								<span>Incoming Flights</span>
+							</div>
+							<div class="inc_flight_menu wrapper hidden">
+								<div class="flight entry">SQ979<span class="qty">12345</span></div>
+								<div class="flight entry">SQ990<span class="qty">1235</span></div>
+								<div class="flight entry">SQ981<span class="qty">145</span></div>
+							</div>
+						</div>
+						<div class="outgoing dropdown_wrapper">
+							<div class="header" onclick="toggleDrawer(this)">
+								<span>Outgoing Flights</span>
+							</div>
+							<div class="wrapper hidden">
+								<div class="flight entry">SQ979</div>
+								<div class="flight entry">SQ990</div>
+								<div class="flight entry">SQ981</div>
+							</div>
+						</div>
+						<div class="dropdown_wrapper">
+							<div class="header">
+								<span>Base Inventory</span>
+							</div>
+							
+							<div class="dropdown_wrapper">
+								<div class="header" onclick="toggleDrawer(this)">
+									<span>Crockery</span>
+								</div>
+								<div class="wrapper hidden">
+									<div class="entry">Size A Plates</div>
+									<div class="entry">Size B Plates</div>
+									<div class="entry">Size A Bowls</div>
+								</div>
+							</div>
+							<div class="dropdown_wrapper">
+								<div class="header" onclick="toggleDrawer(this)">
+									<span>Cutlery</span>
+								</div>
+								<div class="wrapper hidden">
+									<div class="entry">Spoons<span class="qty">12345</span></div>
+									<div class="entry">Forks<span class="qty">12345</span></div>
+									<div class="entry">Knives<span class="qty">12345</span></div>
+									<div class="entry">Dessert Spoons<span class="qty">12345</span></div>
+								</div>
+							</div>
+							<div class="dropdown_wrapper">
+								<div class="header" onclick="toggleDrawer(this)">
+									<span>Food Sets</span>
+								</div>
+								<div class="wrapper hidden">
+									<div class="entry">Business Cl - Chicken</div>
+									<div class="entry">Business Cl - Beef</div>
+									<div class="entry">Economy Cl - Chicken</div>
+									<div class="entry">Economy Cl - Fish</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				-->
+				</div>
+
+		</div>
+		
+
+		<div class="box" id="incoming_cont">
+			<div class="header mid">Ongoing Flights</div>
+
+		</div>
+		<div class="box" id="outgoing_cont">
+			<div class="header mid">Preparing for Take Off</div>
+
 		</div>
 	</div>
 </div>
