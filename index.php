@@ -208,7 +208,18 @@ $(document).ready(function() {
 	$.get("dbt2.php", function(data, status){
 		$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+data+"</div>");
 	});
+
+	var multi_dim_data = <?php echo json_encode($nested_array); ?>;
+	alert(multi_dim_data[8]['location']);
+
+
 	
+	$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[8]['location']+"<br>"+
+		//multi_dim_data['id'==2]['location']+"<br>"+
+		multi_dim_data[3].location+"<br>"+
+		//multi_dim_data..location+"<br>"+
+		multi_dim_data.length+
+		"</div>");
 	
 });
 </script>
