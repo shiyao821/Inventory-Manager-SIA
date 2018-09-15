@@ -209,14 +209,77 @@ function flight_entry_redirect(flight_no) {
 function constructor(id_array){
 	if (id_array['location_type'] == 'base') {
 		//for bases
+
+		var inc_flight_div = '<div class="flight entry mid">no incoming flights</div>';
+
+		var out_flight_div = '<div class="flight entry mid">no outgoing flights</div>';
+		
+		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div class="wrapper hidden">' +out_flight_div + '</div> </div>';
+
+		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div class="wrapper hidden">'+inc_flight_div+'</div></div>';
+
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+
+		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+
+				crockery_menu+
+				cutlery_menu+
+				food_menu+
+			'</div>';
+
+
+		$('#base_cont').append('<div class="base"> <div class="header mid">'+ id_array['location']+ '</div>' + 
+			inc_flight_menu + 
+			out_flight_menu + 
+			base_inv_menu + 
+			'</div>');
+
+
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] == 'airborne'){
 		//for airborne flights
+		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
+
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+				crockery_menu+
+				cutlery_menu+
+				food_menu+
+			'</div></div>';
+
+		$('#incoming_cont').append('<div class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
+
+		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
+
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+				crockery_menu+
+				cutlery_menu+
+				food_menu+
+			'</div></div>';
+
+		$('#outgoing_cont').append('<div class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+
 	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
 		//grounded flights, not gonna be displayed
 	}
 };
+
 
 $(document).ready(function() {
 	//printbox2
@@ -226,8 +289,9 @@ $(document).ready(function() {
 
 	var multi_dim_data = <?php echo json_encode($nested_array); ?>;
 
+	constructor(multi_dim_data[8]);
 
-	
+	/*
 	$('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
 		multi_dim_data[3].location+"<br>"+
 		multi_dim_data.length+
@@ -245,11 +309,19 @@ $(document).ready(function() {
 		// for (var id in multi_dim_data) {
 		// 	if 
 		// }
-	}, 1000);
+	}, 1000);*/
 
+	//flight updater
+	// for (var i = 0; i < multi_dim_data.length; i++) {
+	// 		var flight_row = multi_dim_data[i];
+	// 		if (multi_dim_data[i].flight_destination == id_array.location){
+	// 			inc_flight_div += '<div class="flight entry" onclick="flight_entry_redirect(\''+flight_row.flight_no+'\')">'+'<span class="qty">'+flight_row.flight_origin+'</span></div>';
+	// 		}
+	// 	}
 
 
 	
+
 });
 </script>
 
