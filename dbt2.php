@@ -178,7 +178,6 @@ function construct_landed() {
 	}
 };
 
-//function get_data() {
 	$servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -199,8 +198,6 @@ function construct_landed() {
 			$nested_array[] = $row;
 		}
 	}
-	
-//}
 
 echo "printbox test";
 

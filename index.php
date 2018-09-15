@@ -1,5 +1,6 @@
 <!-- <?php
 	include('dbt2.php');
+//	print_r($nested_array);
 ?> -->
 
 <html>
@@ -188,6 +189,7 @@ p{
 </div>
 <div id="footer">
 	<p>Inventory Management System - Proposed by YOND</p>
+	<div id="loader"></div>
 </div>
 
 <script type="text/javascript">
@@ -203,6 +205,19 @@ function flight_entry_redirect(flight_no) {
 	//alert('clicked');
 };
 
+//Constructor
+function constructor(id_array){
+	if (id_array['location_type'] == 'base') {
+		//for bases
+	} else if (id_array['location_type'] == 'flight' && id_array['location'] == 'airborne'){
+		//for airborne flights
+	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
+		//for flights preparing to take off
+	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
+		//grounded flights, not gonna be displayed
+	}
+};
+
 $(document).ready(function() {
 	//printbox2
 	$.get("dbt2.php", function(data, status){
@@ -210,16 +225,30 @@ $(document).ready(function() {
 	});
 
 	var multi_dim_data = <?php echo json_encode($nested_array); ?>;
-	alert(multi_dim_data[8]['location']);
 
 
 	
-	$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[8]['location']+"<br>"+
-		//multi_dim_data['id'==2]['location']+"<br>"+
+	$('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
 		multi_dim_data[3].location+"<br>"+
-		//multi_dim_data..location+"<br>"+
 		multi_dim_data.length+
 		"</div>");
+
+	setInterval (function(){
+		$("#loader").load("dbt2_updater.php", function(responseText){
+			multi_dim_data = JSON.parse(responseText);
+		//alert("updated");
+		});
+		$("#multi_dim_data_printbox").html("Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
+		multi_dim_data.length+
+		"</div>");
+
+		// for (var id in multi_dim_data) {
+		// 	if 
+		// }
+	}, 1000);
+
+
+
 	
 });
 </script>
