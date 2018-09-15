@@ -24,4 +24,7 @@
 //echo "printbox test";
 echo json_encode($nested_array);
 
+
+//IMPORTANT!!! NEVER EVER rearrange the order of the bases/flights of the database. only add new rows!. NEver delete any! put 'nil' if flightno is retired.
+
 ?>

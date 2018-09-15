@@ -9,7 +9,7 @@
 	<script src="jquery-3.1.1.min.js"></script>
 	<script src="jquery.easing.1.3.js"></script>
 	<script src="jquery-ui.min.js"></script>
-	<script src="angular.min.js"></script>
+	<!-- <script src="angular.min.js"></script> -->
 <style>
 #footer{
 	position:fixed;
@@ -237,7 +237,6 @@ function constructor(id_array){
 			base_inv_menu + 
 			'</div>');
 
-
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] == 'airborne'){
 		//for airborne flights
 		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
@@ -248,13 +247,13 @@ function constructor(id_array){
 
 		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
 
-		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
 				cutlery_menu+
 				food_menu+
 			'</div></div>';
 
-		$('#incoming_cont').append('<div class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#incoming_cont').append('<div id="flight_3_'+id_array.flight_no+'_cont" class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
@@ -273,13 +272,75 @@ function constructor(id_array){
 				food_menu+
 			'</div></div>';
 
-		$('#outgoing_cont').append('<div class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#outgoing_cont').append('<div id="flight_2_'+id_array.flight_no+'_cont" class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
 		//grounded flights, not gonna be displayed
 	}
 };
 
+function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
+	//Check length
+	//some code
+
+	//same length:
+	for (var i = 0; i < new_multi_dim_data.length; i++) {
+		if (check_flight_status(old_multi_dim_data[i]) !== check_flight_status(new_multi_dim_data[i])) {
+
+			// alert('changed');
+
+			if (check_flight_status(old_multi_dim_data[i]) == 1 && check_flight_status(new_multi_dim_data[i]) == 2) {
+				//flight has new destination
+				//execute
+				alert()
+				constructor(new_multi_dim_data[i]);
+				alert('1 to 2');
+
+			} else if (check_flight_status(old_multi_dim_data[i]) == 2 && check_flight_status(new_multi_dim_data[i]) == 3) {
+				//flight has just taken off
+				//execute
+
+				constructor(new_multi_dim_data[i]);
+				var id = '#flight_2_'+new_multi_dim_data[i].flight_no+'_cont';
+				alert(id);
+				$(id).remove();
+				
+			} else if (check_flight_status(old_multi_dim_data[i]) == 3 && check_flight_status(new_multi_dim_data[i]) == 1) {
+				//flight has just landed
+				//execute
+				alert('3 to 1');
+
+				var id = '#flight_3_'+old_multi_dim_data[i].flight_no+'_cont';
+				$(id).remove();
+				
+			} else {
+				alert('illegal');
+			}
+		}
+
+	}
+};
+
+for (var i = 1; i <= 9; i++) {
+$('#taskbar').append("<div id='pbfs"+i+"' class='printbox'>F_S"+i+":  <br></div>");
+};
+
+function check_flight_status(id_array) {
+	if (id_array.flight_destination == 'nil') {
+		//no destination
+		$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>1");
+		return 1;
+	} else if (id_array.location !== 'airborne') {
+		//no destination, not airborne
+
+		$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>2");
+		return 2;
+	} else {
+		//airborne
+		$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>3");
+		return 3;
+	} 
+}
 
 $(document).ready(function() {
 	//printbox2
@@ -291,25 +352,37 @@ $(document).ready(function() {
 
 	constructor(multi_dim_data[8]);
 
-	/*
+	
 	$('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
 		multi_dim_data[3].location+"<br>"+
 		multi_dim_data.length+
 		"</div>");
 
+	var old_multi_dim_data = "";
+
 	setInterval (function(){
+		
 		$("#loader").load("dbt2_updater.php", function(responseText){
+			old_multi_dim_data = multi_dim_data;
 			multi_dim_data = JSON.parse(responseText);
-		//alert("updated");
+			update_flight_status(old_multi_dim_data, multi_dim_data);
+			
+			//DISPLAy
+			$("#multi_dim_data_printbox").html("multi_dim_data_printbox: <br>"+
+			old_multi_dim_data[8].location+"<br>"+
+			multi_dim_data.length+"<br>"+
+			multi_dim_data[8].location+
+			"</div>");
 		});
-		$("#multi_dim_data_printbox").html("Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
-		multi_dim_data.length+
-		"</div>");
+		
+
+		//multi_dim_data[8].location = "airborne";
+		//alert(old_multi_dim_data[8].location + multi_dim_data[8].location);
 
 		// for (var id in multi_dim_data) {
 		// 	if 
 		// }
-	}, 1000);*/
+	}, 1000);
 
 	//flight updater
 	// for (var i = 0; i < multi_dim_data.length; i++) {
