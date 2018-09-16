@@ -67,7 +67,6 @@ p{
 
 .box{
 	background-color:white;
-	top:16vh;
 	padding-bottom: 30px;
 }
 
@@ -80,12 +79,13 @@ p{
 	min-height:35vh;
 	left: 63vw;
 	width:37vw;
+	overflow: auto;
 }
 #outgoing_cont{
 	min-height:35vh;
 	left:63vw;
-	top: 50%;
 	width:37vw;
+	overflow:auto;
 }
 .header{
 	border: solid 1px gray;
@@ -101,17 +101,43 @@ p{
 	text-align: center;
 	border: solid 1px gray;
 }
-.base{
+.base_unit{
 	background-color:rgb(235, 238, 244);
 	margin: 0.5vw;
 	width: 14vw;
 	min-height: 10vh;
 	float: left;
 }
+
+.flight_unit{
+	background-color:rgb(235, 238, 244);
+	margin: 0.5vw;
+	width: 10vw;
+	min-height: 10vh;
+	float: left;
+}
+
+.base_divider{
+	background-color: orange;
+	width:100%;
+	height: 2px;
+	float:left;
+}
+
+.flight_divider{
+	background-color: orange;
+	width:100%;
+	height: 2px;
+	float:left;
+}
 .dropdown_wrapper{
-	min-height: 2vw;
 	position: relative;
 	display:block;
+}
+.subheader{
+	line-height: 1.5vw;
+	text-align: center;
+	border: solid 1px gray;
 }
 
 .entry {
@@ -120,7 +146,6 @@ p{
 	display:block;
 	border-bottom: 1px dashed gray;
 }
-
 
 .flight {
 	background-color:rgb(200, 238, 230);
@@ -148,6 +173,10 @@ p{
 .qty{
 	padding-right: 5px;
 	float:right;
+}
+
+.warning{
+	background-color: rgb(250, 80, 50);
 }
 
 </style>
@@ -191,6 +220,7 @@ p{
 	<div id="loader"></div>
 </div>
 
+
 <script type="text/javascript">
 alert('javascript working');
 
@@ -209,6 +239,83 @@ var default_inc_flight_div = '<div class="flight mid">No Incoming Flights</div>'
 var default_out_flight_div = '<div class="flight mid">No Outgoing Flights</div>';
 
 function constructor(id_array){
+	//templates
+	var templateholder = 0;
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		'<span>Crockery</span> </div>'+
+		'<div class="wrapper hidden">'+
+		'<div class="entry">Size A Plates'+
+		
+		'<span id="'+id_array.id+'.size_a_plates" class="data qty">'+
+		id_array['size_a_plates']+
+		'</span></div>'+
+		
+		'<div class="data entry">Size B Plates'+
+		'<span id="'+id_array.id+'.size_b_plates" class="data qty">'+
+		id_array['size_b_plates']+
+		'</span></div>'+
+		
+		'<div class="entry">Size A Bowls'+
+		'<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+
+		id_array['size_a_bowls']+
+		'</span></div>'+
+		'</div> </div>';
+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		'<span>Cutlery</span></div>'+
+		'<div class="wrapper hidden">'+
+
+		'<div class="entry">Spoons'+
+		'<span id="'+id_array.id+'.spoons" class="data qty">'+
+		id_array['spoons']+
+		'</span></div>'+
+
+		'<div class="entry">Forks'+
+		'<span id="'+id_array.id+'.forks" class="data qty">'+
+		id_array['forks']+
+		'</span></div>'+
+
+		'<div class="entry">Knives'+
+		'<span id="'+id_array.id+'.knives" class="data qty">'+
+		id_array['knives']+
+		'</span></div>'+
+		'<div class="entry">Dessert Spoons'+
+		'<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+
+		id_array['dessert_spoons']+
+		'</span></div>'+
+		'</div> </div>';
+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		'<span>Food Sets</span> </div>'+
+		'<div class="wrapper hidden">'+
+		
+		'<div class="entry">BusnCl - Chic'+
+		'<span id="'+id_array.id+'.busi_chicken" class="data qty">'+
+		id_array['busi_chicken']+
+		'</span></div>'+
+		
+		'<div class="entry">BusnCl - Beef'+
+		'<span id="'+id_array.id+'.busi_beef" class="data qty">'+
+		id_array['busi_beef']+
+		'</span></div>'+
+
+		'<div class="entry">EconCl - Chic'+
+		'<span id="'+id_array.id+'.econ_chicken" class="data qty">'+
+		id_array['econ_chicken']+
+		'</span></div>'+
+
+		'<div class="entry">EconCl - Fish'+
+		'<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+
+		'</span></div>'+
+		'</div></div>';
+
+		var destination_panel = '<div class="dest_display"><span>' +
+		id_array['flight_origin'] +
+		'</span> to <span>' +
+		id_array['flight_destination'] +
+		'</span></div>';
+
+	//Check type
 	if (id_array['location_type'] == 'base') {
 		//for bases
 
@@ -220,12 +327,6 @@ function constructor(id_array){
 
 		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div id="'+id_array.location+'_inc_flight_wrapper" class="wrapper hidden">'+inc_flight_div+'</div></div>';
 
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
-
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
-
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
-
 		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+
 				crockery_menu+
 				cutlery_menu+
@@ -233,7 +334,7 @@ function constructor(id_array){
 			'</div>';
 
 
-		$('#base_cont').append('<div class="base"> <div class="header mid">'+ id_array['location']+ '</div>' + 
+		$('#base_cont').append('<div class="base_unit"> <div class="header mid">'+ id_array['location']+ '</div>' + 
 			inc_flight_menu + 
 			out_flight_menu + 
 			base_inv_menu + 
@@ -241,32 +342,17 @@ function constructor(id_array){
 
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] == 'airborne'){
 		//for airborne flights
-		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
-
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
-
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
-
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
-
+		
 		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
 				cutlery_menu+
 				food_menu+
 			'</div></div>';
 
-		$('#incoming_cont').append('<div id="flight_3_'+id_array.flight_no+'_cont" class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#incoming_cont').append('<div id="flight_3_'+id_array.flight_no+'_cont" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
-
-		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
-
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
-
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
-
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
 
 		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
@@ -274,13 +360,33 @@ function constructor(id_array){
 				food_menu+
 			'</div></div>';
 
-		$('#outgoing_cont').append('<div id="flight_2_'+id_array.flight_no+'_cont" class="base"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#outgoing_cont').append('<div id="flight_2_'+id_array.flight_no+'_cont" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
 		//grounded flights, not gonna be displayed
 	}
 };
 
+//UPDATING ALL DATA VALUES
+function update_data(bigdata) {
+	$('span.data').each(function(i, element){
+		var arr = this.id.split(".");
+		var id = arr[0] - 1;
+		var col = arr[1];
+		var new_qty = bigdata[id][col];
+		$(this).html(new_qty);
+		
+		//check for base inv limit
+		if (bigdata[id]['location_type'] == 'base') {
+			if (parseInt(new_qty) <= bigdata[id + 1][col]) {
+				$(this).parent().addClass('warning');
+				$(this).parent().parent().prev().addClass('warning');
+			}
+		}
+	});
+};
+
+//FLIGHT CHECKS & UPDATING 
 function insert_flight_divs(id_array) {
 	var f_no = id_array.flight_no;
 	var destin = id_array.flight_destination;
@@ -323,6 +429,24 @@ function remove_flight_divs(id_array) {
 	}
 };
 
+function update_flight_dividers() {
+	$('.flight_divider').remove();
+	var inc_count = 0;
+	$('#incoming_cont').children('.flight_unit').each(function(){
+		inc_count++;
+		if (inc_count % 3 == 0) {
+			$(this).after('<div class="flight_divider"></div>');
+		}
+	});
+	var out_count = 0;
+	$('#outgoing_cont').children('.flight_unit').each(function(){
+		out_count++;
+		if (out_count % 3 == 0) {
+			$(this).after('<div class="flight_divider"></div>');
+		}
+	});
+}
+
 function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
 	//Check length
 	//some code
@@ -362,14 +486,10 @@ function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
 			} else {
 				alert('illegal');
 			}
+			update_flight_dividers();
 		}
 
 	}
-};
-
-//DISPLAY FLIGHT STATUS
-for (var i = 1; i <= 9; i++) {
-$('#taskbar').append("<div id='pbfs"+i+"' class='printbox'>F_S"+i+":  <br></div>");
 };
 
 function check_flight_status(id_array) {
@@ -377,30 +497,20 @@ function check_flight_status(id_array) {
 
 		if (id_array.flight_destination == 'nil') {
 			//no destination
-			$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>1");
+			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>1");
 			return 1;
 		} else if (id_array.location !== 'airborne') {
 			//no destination, not airborne
 
-			$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>2");
+			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>2");
 			return 2;
 		} else {
 			//airborne
-			$('#pbfs'+id_array.id).html("F_S"+id_array.id+":  <br>3");
+			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>3");
 			return 3;
 		} 
 	}
 }
-
-function update_data(bigdata) {
-	$('span.data').each(function(i, element){
-		var arr = this.id.split(".");
-		var id = arr[0] - 1;
-		var col = arr[1];
-		var new_qty = bigdata[id][col];
-		$(this).html(new_qty);
-	});
-};
 
 $(document).ready(function() {
 
@@ -416,15 +526,28 @@ $(document).ready(function() {
 // INITIAL CONSTRUCT
 
 	for (var i = 0; i < multi_dim_data.length; i++) {
-		constructor(multi_dim_data[i]);
+		//add divider for every 4 bases
+		if (multi_dim_data[i].location_type !== 'flight') {
+			if ((i + 1) % 8 == 0) {
+				$('#base_cont').append('<div class="base_divider"></div>');
+				constructor(multi_dim_data[i]);
+			} else {
+				constructor(multi_dim_data[i]);
+			}
+		} else {
+			//construct for flights
+			constructor(multi_dim_data[i]);
+			
+			//DISPLAY FLIGHT STATUS
+			$('#taskbar').append("<div id='pbfs"+(i+1)+"' class='printbox'>F.S."+(i+1)+":  <br></div>");
+		}
 
 		//ASSUMING BASES are all constructed before flights
 		if (check_flight_status(multi_dim_data[i]) !== 1) {
 			insert_flight_divs(multi_dim_data[i]);
 		}
 	}; 
-
-	
+	update_flight_dividers();
 	
 // REAL TIME FUNCTIONS
 	setInterval (function(){
