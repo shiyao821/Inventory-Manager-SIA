@@ -220,11 +220,11 @@ function constructor(id_array){
 
 		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div id="'+id_array.location+'_inc_flight_wrapper" class="wrapper hidden">'+inc_flight_div+'</div></div>';
 
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
 
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
 
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
 
 		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+
 				crockery_menu+
@@ -243,11 +243,11 @@ function constructor(id_array){
 		//for airborne flights
 		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
 
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
 
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
 
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
 
 		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
@@ -262,11 +262,11 @@ function constructor(id_array){
 
 		var destination_panel = '<div class="dest_display"><span>' + id_array['flight_origin'] + '</span> to <span>' + id_array['flight_destination'] + '</span></div>';
 
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Crockery</span> </div> <div class="wrapper hidden"> <div class="entry">Size A Plates<span id="'+id_array.id+'.size_a_plates" class="data qty">'+id_array['size_a_plates']+'</span></div> <div class="data entry">Size B Plates<span id="'+id_array.id+'.size_b_plates" class="qty">'+id_array['size_b_plates']+'</span></div> <div class="entry">Size A Bowls<span id="'+id_array.id+'.size_a_bowls" class="data qty">'+id_array['size_a_bowls']+'</span></div> </div> </div>';
 
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span class="qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Cutlery</span> </div> <div class="wrapper hidden"> <div class="entry">Spoons<span id="'+id_array.id+'.spoons" class="data qty">'+id_array['spoons']+'</span></div> <div class="entry">Forks<span id="'+id_array.id+'.forks" class="data qty">'+id_array['forks']+'</span></div> <div class="entry">Knives<span id="'+id_array.id+'.knives" class="data qty">'+id_array['knives']+'</span></div> <div class="entry">Dessert Spoons<span id="'+id_array.id+'.dessert_spoons" class="data qty">'+id_array['dessert_spoons']+'</span></div> </div> </div>';
 
-		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
+		var food_menu = '<div class="dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Food Sets</span> </div> <div  class="wrapper hidden"> <div class="entry">Business Cl - Chicken<span id="'+id_array.id+'.busi_chicken" class="data qty">'+id_array['busi_chicken']+'</span></div> <div class="entry">Business Cl - Beef<span id="'+id_array.id+'.busi_beef" class="data qty">'+id_array['busi_beef']+'</span></div> <div class="entry">Economy Cl - Chicken<span id="'+id_array.id+'.econ_chicken" class="data qty">'+id_array['econ_chicken']+'</span></div> <div class="entry">Economy Cl - Fish<span id="'+id_array.id+'.econ_fish" class="data qty">'+id_array['econ_fish']+'</span></div> </div> </div>';
 
 		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
@@ -392,13 +392,19 @@ function check_flight_status(id_array) {
 	}
 }
 
-$(document).ready(function() {
-	//printbox2
-	$.get("dbt2.php", function(data, status){
-		$('#taskbar').append("<div class='printbox'>Retrieved from dbt2: <br>"+data+"</div>");
+function update_data(bigdata) {
+	$('span.data').each(function(i, element){
+		var arr = this.id.split(".");
+		var id = arr[0] - 1;
+		var col = arr[1];
+		var new_qty = bigdata[id][col];
+		$(this).html(new_qty);
 	});
+};
 
-	var multi_dim_data = <?php echo json_encode($nested_array); ?>;
+$(document).ready(function() {
+
+	let multi_dim_data = <?php echo json_encode($nested_array); ?>;
 	
 	$('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
 		multi_dim_data[3].location+"<br>"+
@@ -418,6 +424,8 @@ $(document).ready(function() {
 		}
 	}; 
 
+	
+	
 // REAL TIME FUNCTIONS
 	setInterval (function(){
 		
@@ -425,11 +433,11 @@ $(document).ready(function() {
 			old_multi_dim_data = multi_dim_data;
 			multi_dim_data = JSON.parse(responseText);
 			update_flight_status(old_multi_dim_data, multi_dim_data);
+			update_data(multi_dim_data);
 			
 			//DISPLAY
 			$("#multi_dim_data_printbox").html("multi_dim_data_printbox: <br>"+
 			old_multi_dim_data[8].location+"<br>"+
-			multi_dim_data.length+"<br>"+
 			multi_dim_data[8].location+
 			"</div>");
 		});
@@ -437,8 +445,6 @@ $(document).ready(function() {
 
 	}, 1000);
 
-
-	
 
 });
 </script>
