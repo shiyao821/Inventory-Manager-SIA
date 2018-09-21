@@ -14,24 +14,26 @@
 	position:fixed;
 	height: 20px;
 	bottom:0px;
-	background-color:rgb(65, 79, 104);
+	background-color:rgb(0, 38, 107);
 	width: 100%;
 	text-align:center;
 	color:rgb(235, 238, 244);
+	font-family: Times New Roman;
 }
 
 body{
 	margin:0px;
 	padding:0px;
-	background-color:rgb(65, 79, 104);
+	background-color:rgb(0, 38, 107);
 	overflow-x:hidden;
+	font-family: Helvetica;
 }
 p{
 	margin:0px;
 }
 
 #logPnl{
-	background-color:rgb(65, 79, 104);
+	background-color:rgb(0, 38, 107);
 	color:rgb(235, 238, 244);
 	width:300px;
 	height:100vh;
@@ -61,13 +63,14 @@ p{
 
 .interface_cell{
 	display: table-cell;
-	background-color: white;
+	background-color: rgb(70, 70, 70);
 	padding-bottom: 30px;
 }
 
 .box{
-	background-color:white;
+	background-color:rgb(70, 70, 70);
 	padding-bottom: 30px;
+	/*border-left: solid 1px rgb(249, 159, 28);*/
 }
 
 #base_cont{
@@ -88,9 +91,37 @@ p{
 	overflow:auto;
 }
 .header{
-	border: solid 1px gray;
+	/*border-bottom: solid 1px rgb(249, 159, 28);*/
 	line-height:2vw;
 	text-align:center;
+}
+.dropdown_wrapper > .header:after{
+	content: "";
+	display: block;
+	margin: 0 auto;
+	width: 95%;
+	border-bottom: solid 1px rgb(249, 159, 28);
+}
+.box > .header{
+	background-color: white;
+}
+
+.dropdown_wrapper{
+	position: relative;
+	display:block;
+}
+.subheader{
+	line-height: 1.5vw;
+	text-align: center;
+	/*border-bottom: solid 1px rgb(187, 129, 48);*/
+	font-size: 14px;
+}
+.subheader:after{
+	content: "";
+	display: block;
+	margin: 0 auto;
+	width: 85%;
+	border-bottom: solid 1px rgb(187, 129, 48);
 }
 .mid {
 	text-align:center;
@@ -99,45 +130,54 @@ p{
 .dest_display{
 	line-height:2vw;
 	text-align: center;
-	border: solid 1px gray;
+	border-bottom: solid 1px rgb(249, 159, 28);
 }
 .base_unit{
-	background-color:rgb(235, 238, 244);
-	margin: 0.5vw;
+	background-color:rgb(55, 55, 55);
+	margin: 0.4vw;
+	padding: 0.3vw;
 	width: 14vw;
 	min-height: 10vh;
 	float: left;
+	color: rgb(240, 240, 240);
+}
+.base_unit > .header{
+	color: rgb(249, 159, 28);
+	border: solid 1.5px rgb(249, 159, 28);
+	font-size: 120%;
+}
+
+.flight_unit > .header{
+	color: rgb(249, 159, 28);
+	border: solid 1.5px rgb(249, 159, 28);
+	font-size: 120%;
 }
 
 .flight_unit{
-	background-color:rgb(235, 238, 244);
-	margin: 0.5vw;
+	background-color:rgb(55, 55, 55);
+	margin: 0.4vw;
+	padding: 0.4vw;
 	width: 10vw;
 	min-height: 10vh;
 	float: left;
+	color: rgb(240, 240, 240);
+	font-size: 14px;
 }
 
 .base_divider{
-	background-color: orange;
-	width:100%;
+	background-color: rgb(50, 50, 50);
+	width:90%;
 	height: 2px;
 	float:left;
+	margin-left: 5%;
 }
 
 .flight_divider{
-	background-color: orange;
-	width:100%;
+	background-color: rgb(50, 50, 50);
+	width:90%;
 	height: 2px;
 	float:left;
-}
-.dropdown_wrapper{
-	position: relative;
-	display:block;
-}
-.subheader{
-	line-height: 1.5vw;
-	text-align: center;
-	border: solid 1px gray;
+	margin-left: 5%
 }
 
 .entry {
@@ -145,17 +185,21 @@ p{
 	padding-left:8px;
 	display:block;
 	border-bottom: 1px dashed gray;
+	font-size: 12px;
+	line-height: 1.5vw;
 }
 
 .flight {
-	background-color:rgb(200, 238, 230);
-	line-height:2vw;
+	background-color:rgb(80, 80, 80);
+	line-height:1.5vw;
 }
 .incoming{
-	background-color:rgb(100, 238, 200);
+	/*background-color:rgb(100, 238, 200);*/
+	color:rgb(230, 200, 200);
 }
 .outgoing{
-	background-color:rgb(238, 100, 200);
+	/*background-color:rgb(238, 100, 200);*/
+	color:rgb(218, 200, 150);
 }
 
 .hidden{
@@ -166,7 +210,7 @@ p{
 	overflow: hidden;
 }
 .printbox{
-	float:left;
+	float:right;
 	height:100%;
 	border: dashed 1px white;
 }
@@ -176,7 +220,20 @@ p{
 }
 
 .warning{
-	background-color: rgb(250, 80, 50);
+	color: rgb(250, 50, 50);
+	border-bottom-color: rgb(250, 80, 50);
+}
+
+#img_logo{
+	height: 100%;
+	margin-left: 50px;
+	float: left;
+}
+
+#title{
+	float:left;
+	margin-left: 30px;
+	line-height: 70px;
 }
 
 </style>
@@ -192,15 +249,15 @@ p{
 -->
 <div id="content">
 	<div id="taskbar">
-	<div class="printbox">Printbox1</div>
+		<img id="img_logo" src="SIA_logo.jpg" alt="SIA logo">
+		<div id="title">Inventory Management System</div>
+		<div class="printbox">Printbox1</div>
 	</div>
 	<div id="interface">
 		<div class="interface_cell">
 			<div class="box" id="base_cont">
 				<div class="header mid">Bases</div>
-					<div class="row_container_base">
-					
-					</div>
+
 				</div>
 		</div>
 		<div class="interface_cell">
@@ -235,8 +292,8 @@ function flight_entry_redirect(flight_no) {
 };
 
 //Constructor
-var default_inc_flight_div = '<div class="flight mid">No Incoming Flights</div>';
-var default_out_flight_div = '<div class="flight mid">No Outgoing Flights</div>';
+var default_inc_flight_div = '<div class="flight entry mid">No Incoming Flights</div>';
+var default_out_flight_div = '<div class="flight entry mid">No Outgoing Flights</div>';
 
 function constructor(id_array){
 	//templates
@@ -250,7 +307,7 @@ function constructor(id_array){
 		id_array['size_a_plates']+
 		'</span></div>'+
 		
-		'<div class="data entry">Size B Plates'+
+		'<div class="entry">Size B Plates'+
 		'<span id="'+id_array.id+'.size_b_plates" class="data qty">'+
 		id_array['size_b_plates']+
 		'</span></div>'+
