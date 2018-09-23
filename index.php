@@ -10,16 +10,6 @@
 	<script src="jquery-ui.min.js"></script>
 	<!-- <script src="angular.min.js"></script> -->
 <style>
-#footer{
-	position:fixed;
-	height: 20px;
-	bottom:0px;
-	background-color:rgb(0, 38, 107);
-	width: 100%;
-	text-align:center;
-	color:rgb(235, 238, 244);
-	font-family: Times New Roman;
-}
 
 body{
 	margin:0px;
@@ -30,16 +20,6 @@ body{
 }
 p{
 	margin:0px;
-}
-
-#logPnl{
-	background-color:rgb(0, 38, 107);
-	color:rgb(235, 238, 244);
-	width:300px;
-	height:100vh;
-	margin:0px;
-	position:fixed;
-	z-index:-1;
 }
 
 #content{
@@ -193,6 +173,7 @@ p{
 	background-color:rgb(80, 80, 80);
 	line-height:1.5vw;
 }
+
 .incoming{
 	/*background-color:rgb(100, 238, 200);*/
 	color:rgb(230, 200, 200);
@@ -234,6 +215,78 @@ p{
 	float:left;
 	margin-left: 30px;
 	line-height: 70px;
+	font-size: 30px;
+}
+
+#footer{
+	position:fixed;
+	height: 20px;
+	bottom:0px;
+	background-color:rgb(0, 38, 107);
+	width: 100%;
+	text-align:center;
+	color:rgb(235, 238, 244);
+	font-family: Times New Roman;
+}
+
+#console{
+	background-color:rgb(0, 38, 107);
+	color:rgb(235, 238, 244);
+	padding-top: 20px;
+	width:100%;
+	height:300px;
+	position:fixed;
+	z-index:1;
+	bottom: 20px;
+}
+
+#console_display_title{
+	width: 12vw;
+	font-size: 70px;
+	font-weight: bold;
+	margin-left: 6vw;
+	float: left;
+}
+
+#console_flight_strip_wrapper{
+	margin-left: 6vw;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.console_flight_strip{
+	width: 70vw;
+	line-height: 25px;
+	border: dashed 1px gray;
+}
+
+#console_inv_table{
+	display: table;
+	height: 180px;
+	border: dashed 1px gray;
+	width: 90%;
+	margin: auto;
+}
+.console_inv_category{
+	display: table-cell;
+	border: dashed 1px gray;
+}
+.console_inv_col_grp{
+	height: 100%;
+}
+
+#console_dropper {
+	height:30px;
+	width: 30px;
+	margin-right: 20px;
+	background-color: rgb(249, 159, 28);
+	float: right;
+}
+
+.clickable:hover{
+	color: rgb(100, 138, 207);
+	cursor: pointer;
+	border-color: rgb(100, 138, 207);
 }
 
 </style>
@@ -241,12 +294,6 @@ p{
 </head>
 
 <body>
-<!--
-<div id="logPnl">
-<h3>Console</h3>
-<p id="console"></p>
-</div>
--->
 <div id="content">
 	<div id="taskbar">
 		<img id="img_logo" src="SIA_logo.jpg" alt="SIA logo">
@@ -256,7 +303,7 @@ p{
 	<div id="interface">
 		<div class="interface_cell">
 			<div class="box" id="base_cont">
-				<div class="header mid">Bases</div>
+				<div class="header mid" onclick="toggleConsoleDrawer()">Bases</div>
 
 				</div>
 		</div>
@@ -272,6 +319,95 @@ p{
 		</div>
 	</div>
 </div>
+
+<div id="console" class="hidden" onclick="">
+	<div id="console_dropper" class="clickable" onclick="toggleConsoleDrawer()"> </div>
+	<div id="console_display_title">TEST</div>
+	<div id="console_flight_strip_wrapper">
+		<div class="console_flight_strip">Incoming Flights</div>
+		<div class="console_flight_strip">Planes at Base</div>
+		<div class="console_flight_strip">Outgoing Flights</div>
+	</div>
+	<div id="console_inv_table">
+		<div class="console_inv_category">
+			<div class="header">Crockery</div>
+			<div class="console_inv_col_grp">
+				<div class="entry">Size A Plates
+					<span id="size_a_plates" class="console data qty">
+						test
+					</span>
+				</div>
+		
+				<div class="entry">Size B Plates
+					<span id="size_b_plates" class="console data qty">
+						test2
+					</span>
+				</div>
+		
+				<div class="entry">Size A Bowls
+					<span id="size_a_bowls" class="console data qty">
+						test3
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="console_inv_category">
+			<div class="header">Cutlery</div>
+			<div class="console_inv_col_grp">
+				<div class="entry">Spoons
+					<span id="spoons" class="console data qty">
+						test
+					</span>
+				</div>
+		
+				<div class="entry">Forks
+					<span id="forks" class="console data qty">
+						test2
+					</span>
+				</div>
+		
+				<div class="entry">Knives
+					<span id="knives" class="console data qty">
+						test3
+					</span>
+				</div>
+				<div class="entry">Dessert Spoons
+					<span id="dessert_spoons" class="console data qty">
+						test4
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="console_inv_category">
+			<div class="header">Food Sets</div>
+			<div class="console_inv_col_grp">
+				<div class="entry">Business Class - Chicken
+					<span id="busi_chicken" class="console data qty">
+						test
+					</span>
+				</div>
+		
+				<div class="entry">Business Class - Beef
+					<span id="busi_beef" class="console data qty">
+						test2
+					</span>
+				</div>
+		
+				<div class="entry">Economy Class - Chicken
+					<span id="econ_chicken" class="console data qty">
+						test3
+					</span>
+				</div>
+				<div class="entry">Economy Class - Fish
+					<span id="econ_fish" class="console data qty">
+						test4
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="footer">
 	<p>Inventory Management System - Proposed by YOND</p>
 	<div id="loader"></div>
@@ -281,15 +417,40 @@ p{
 <script type="text/javascript">
 alert('javascript working');
 
+//CLICKING FUNCTIONS
 function toggleDrawer(clicked) {
 	$(clicked).next().slideToggle(600, "easeOutQuint");
 	  //alert($(this));
 };
 
+function toggleConsoleDrawer(clicked) {
+	$('#console').slideToggle(600, "easeOutQuint");
+	  //alert($(this));
+};
+
+
 function flight_entry_redirect(flight_no) {
 	toggleDrawer($('#'+flight_no+'_inv_drawer'));
 	//alert('clicked');
 };
+
+function base_header_clicked(clicked) {
+	$('#console_display_title').html($(clicked).html());
+	var arr = clicked.id.split(".");
+	var base_no = arr[0];
+	$('span.console.data').each(function(){
+		var arr2 = this.id.split(".");
+		if ($.isNumeric(arr2[0])) {
+			this.id = base_no + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];			
+		} else {
+			this.id = base_no + '.' + this.id + '.' + 'console';
+		}
+	});
+	if ($('#console').is(':hidden')) {
+		toggleConsoleDrawer();
+	};
+}
+
 
 //Constructor
 var default_inc_flight_div = '<div class="flight entry mid">No Incoming Flights</div>';
@@ -298,7 +459,7 @@ var default_out_flight_div = '<div class="flight entry mid">No Outgoing Flights<
 function constructor(id_array){
 	//templates
 	var templateholder = 0;
-		var crockery_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		var crockery_menu = '<div class="dropdown_wrapper"> <div class="subheader clickable" onclick="toggleDrawer(this)">'+
 		'<span>Crockery</span> </div>'+
 		'<div class="wrapper hidden">'+
 		'<div class="entry">Size A Plates'+
@@ -318,7 +479,7 @@ function constructor(id_array){
 		'</span></div>'+
 		'</div> </div>';
 
-		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		var cutlery_menu = '<div class="dropdown_wrapper"> <div class="subheader clickable" onclick="toggleDrawer(this)">'+
 		'<span>Cutlery</span></div>'+
 		'<div class="wrapper hidden">'+
 
@@ -342,7 +503,7 @@ function constructor(id_array){
 		'</span></div>'+
 		'</div> </div>';
 
-		var food_menu = '<div class="dropdown_wrapper"> <div class="subheader" onclick="toggleDrawer(this)">'+
+		var food_menu = '<div class="dropdown_wrapper"> <div class="subheader clickable" onclick="toggleDrawer(this)">'+
 		'<span>Food Sets</span> </div>'+
 		'<div class="wrapper hidden">'+
 		
@@ -380,9 +541,9 @@ function constructor(id_array){
 
 		var out_flight_div = default_out_flight_div;
 		
-		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div id="'+id_array.location+'_out_flight_wrapper" class="wrapper hidden">' +out_flight_div + '</div> </div>';
+		var out_flight_menu = '<div class="outgoing dropdown_wrapper"> <div class="header clickable" onclick="toggleDrawer(this)"> <span>Outgoing Flights</span> </div> <div id="'+id_array.location+'_out_flight_wrapper" class="wrapper hidden">' +out_flight_div + '</div> </div>';
 
-		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div id="'+id_array.location+'_inc_flight_wrapper" class="wrapper hidden">'+inc_flight_div+'</div></div>';
+		var inc_flight_menu = '<div class="incoming dropdown_wrapper"><div class="header clickable" onclick="toggleDrawer(this)"><span>Incoming Flights</span></div><div id="'+id_array.location+'_inc_flight_wrapper" class="wrapper hidden">'+inc_flight_div+'</div></div>';
 
 		var base_inv_menu = '<div class="dropdown_wrapper"> <div class="header"> <span>Base Inventory</span> </div>'+
 				crockery_menu+
@@ -391,7 +552,12 @@ function constructor(id_array){
 			'</div>';
 
 
-		$('#base_cont').append('<div class="base_unit"> <div class="header mid">'+ id_array['location']+ '</div>' + 
+		$('#base_cont').append('<div id="'+
+			id_array.id + '.' + id_array.location +
+			'"class="base_unit"> <div class="header mid clickable" id="'+
+			id_array.id + '.' + id_array.location + '.header' +
+			'" onclick="base_header_clicked(this)">'+ 
+			id_array['location'] + '</div>' + 
 			inc_flight_menu + 
 			out_flight_menu + 
 			base_inv_menu + 
@@ -400,7 +566,7 @@ function constructor(id_array){
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] == 'airborne'){
 		//for airborne flights
 		
-		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header clickable" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
 				cutlery_menu+
 				food_menu+
@@ -411,7 +577,7 @@ function constructor(id_array){
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
 
-		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header clickable" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
 				cutlery_menu+
 				food_menu+
@@ -437,11 +603,23 @@ function update_data(bigdata) {
 		if (bigdata[id]['location_type'] == 'base') {
 			if (parseInt(new_qty) <= bigdata[id + 1][col]) {
 				$(this).parent().addClass('warning');
-				$(this).parent().parent().prev().addClass('warning');
+			} else {
+				$(this).parent().removeClass('warning');
 			}
+			subheader_check();
 		}
 	});
 };
+//HIGHLIGHT PARENT SUBHEADER if data under it is highlighted
+function subheader_check() {
+	$('.subheader').each(function(i, element){
+		if ($(this).next().children().hasClass('warning')) {
+			$(this).addClass('warning');
+		} else {
+			$(this).removeClass('warning');
+		}
+	})
+}
 
 //FLIGHT CHECKS & UPDATING 
 function insert_flight_divs(id_array) {
@@ -453,16 +631,16 @@ function insert_flight_divs(id_array) {
 	
 	//insert destination div
 	if ($(target_inc_flight_wrapper).html() == default_inc_flight_div) {
-		$(target_inc_flight_wrapper).html('<div id="'+f_no+'_inc_flight_div" class="flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+origin+'</span></div>')
+		$(target_inc_flight_wrapper).html('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+origin+'</span></div>')
 	} else {
-		$(target_inc_flight_wrapper).append('<div id="'+f_no+'_inc_flight_div" class="flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+origin+'</span></div>')
+		$(target_inc_flight_wrapper).append('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+origin+'</span></div>')
 	};
 
 	//insert origin div
 	if ($(target_out_flight_wrapper).html() == default_out_flight_div) {
-		$(target_out_flight_wrapper).html('<div id="'+f_no+'_out_flight_div" class="flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+destin+'</span></div>')
+		$(target_out_flight_wrapper).html('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+destin+'</span></div>')
 	} else {
-		$(target_out_flight_wrapper).append('<div id="'+f_no+'_out_flight_div" class="flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+destin+'</span></div>')
+		$(target_out_flight_wrapper).append('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">'+destin+'</span></div>')
 	};
 };
 
