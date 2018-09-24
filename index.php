@@ -283,6 +283,23 @@ p{
 	float: right;
 }
 
+.limit_div{
+	width: 70px;
+	margin-left: 10px;
+	float: right;
+}
+
+input{
+	width: 50px;
+}
+
+.edit_btn{
+	height:1.5vw;
+	width: 1.5vw;
+	background-color: rgb(249, 159, 28);
+	float: right;
+}
+
 .clickable:hover{
 	color: rgb(100, 138, 207);
 	cursor: pointer;
@@ -333,19 +350,38 @@ p{
 			<div class="header">Crockery</div>
 			<div class="console_inv_col_grp">
 				<div class="entry">Size A Plates
-					<span id="size_a_plates" class="console data qty">
+					
+					<div class="limit_div">
+						<div id="2.size_a_plates.console_limit.edit_btn" class="console edit_btn" onclick="change_val_btn_clicked(this)"></div>
+
+						<span id="2.size_a_plates.console_limit" class="console data qty" ondblclick="change_val(this)">
+							test2
+						</span>
+					</div>
+					<span id="1.size_a_plates.console" class="console data qty">
 						test
 					</span>
+					
 				</div>
 		
 				<div class="entry">Size B Plates
-					<span id="size_b_plates" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.size_b_plates.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.size_b_plates.console" class="console data qty">
 						test2
 					</span>
 				</div>
 		
 				<div class="entry">Size A Bowls
-					<span id="size_a_bowls" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.size_a_bowls.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.size_a_bowls.console" class="console data qty">
 						test3
 					</span>
 				</div>
@@ -355,24 +391,44 @@ p{
 			<div class="header">Cutlery</div>
 			<div class="console_inv_col_grp">
 				<div class="entry">Spoons
-					<span id="spoons" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.spoons.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.spoons.console" class="console data qty">
 						test
 					</span>
 				</div>
 		
 				<div class="entry">Forks
-					<span id="forks" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.forks.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.forks.console" class="console data qty">
 						test2
 					</span>
 				</div>
 		
 				<div class="entry">Knives
-					<span id="knives" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.knives.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.knives.console" class="console data qty">
 						test3
 					</span>
 				</div>
 				<div class="entry">Dessert Spoons
-					<span id="dessert_spoons" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.dessert_spoons.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.dessert_spoons.console" class="console data qty">
 						test4
 					</span>
 				</div>
@@ -382,24 +438,44 @@ p{
 			<div class="header">Food Sets</div>
 			<div class="console_inv_col_grp">
 				<div class="entry">Business Class - Chicken
-					<span id="busi_chicken" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.busi_chicken.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.busi_chicken.console" class="console data qty">
 						test
 					</span>
 				</div>
 		
 				<div class="entry">Business Class - Beef
-					<span id="busi_beef" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.busi_beef.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.busi_beef.console" class="console data qty">
 						test2
 					</span>
 				</div>
 		
 				<div class="entry">Economy Class - Chicken
-					<span id="econ_chicken" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.econ_chicken.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.econ_chicken.console" class="console data qty">
 						test3
 					</span>
 				</div>
 				<div class="entry">Economy Class - Fish
-					<span id="econ_fish" class="console data qty">
+					<div class="qty limit_div">
+						<span id="1.econ_fish.console_limit" class="console data qty">
+							test2
+						</span>
+					</div>
+					<span id="1.econ_fish.console" class="console data qty">
 						test4
 					</span>
 				</div>
@@ -437,20 +513,53 @@ function flight_entry_redirect(flight_no) {
 function base_header_clicked(clicked) {
 	$('#console_display_title').html($(clicked).html());
 	var arr = clicked.id.split(".");
-	var base_no = arr[0];
+	var base_no = parseInt(arr[0]);
 	$('span.console.data').each(function(){
 		var arr2 = this.id.split(".");
-		if ($.isNumeric(arr2[0])) {
-			this.id = base_no + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];			
+		if (arr2[arr2.length - 1] == 'console_limit') {
+			var base_limit = base_no + 1;
+			this.id = base_limit + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];
 		} else {
-			this.id = base_no + '.' + this.id + '.' + 'console';
+			this.id = base_no + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];
 		}
 	});
+
 	if ($('#console').is(':hidden')) {
 		toggleConsoleDrawer();
 	};
 }
 
+function change_val(clicked){
+	var elem_id = clicked.id;
+	var arr = elem_id.split(".");
+	var row_no = arr[0];
+	var col = arr[1];
+	var value = $(clicked).html();
+	$(clicked).replaceWith('<input id="changing" type="text" value="' + value + '" />');
+	$('#changing').focus();
+	$('#changing').keyup(function() {
+		if (event.which == 13) {
+			var new_qty = $('#changing').val().trim();
+			$('#changing').replaceWith(clicked);
+			$(clicked).html(new_qty);
+
+			//Change Database Data
+			$.post("dbt2_edit.php", {
+				row_no: row_no,
+				col: col,
+				new_qty: new_qty
+			}, function(data, status) {
+				//alert('Requesst sent!');
+			})
+		}
+	})
+}
+
+function change_val_btn_clicked(clicked){
+	var next_elem_id = $('#'+clicked.id).next();
+	change_val(next_elem_id);
+	// change_val($(clicked).next().html(clicked.id));
+}
 
 //Constructor
 var default_inc_flight_div = '<div class="flight entry mid">No Incoming Flights</div>';
