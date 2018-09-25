@@ -218,22 +218,15 @@
 	<div id="loader"></div>
 </div>
 
-
-<!-- <script type="text/javascript" src="index_js.php">
-	//TEST PLACEHOLDER
-	// <?php include('index_js.php'); ?>
-</script> -->
-
-
 <script src="index_click.js"></script>
 <script src="index_constructor.js"></script>
+<script src="index_flight.js"></script>
 
 <script type="text/javascript">
 // $(document).ready(function() {
-
+var console_base_no = 1;
 
 alert('javascript working');
-
 
 function change_val(clicked){
 	var elem_id = clicked.id;
@@ -309,209 +302,65 @@ function arrays_equal(array1, array2) {
 	}
 }
 
-function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
-	//Check length
-	//some code
-
-	//same length:
-	for (var i = 0; i < new_multi_dim_data.length; i++) {
-		
-		if (new_multi_dim_data[i].location_type == 'flight') {
-			//Get flight status
-			var old_status = get_flight_status(old_multi_dim_data[i]);
-			var new_status = get_flight_status(new_multi_dim_data[i]);
-			
-			//check if flight status is equal
-			if (!arrays_equal(old_status, new_status)) {
-				//REMOVE ALL FLIGHT DIVS
-
-				//INSERT NEW FLIGHT DIVS
-			}
-		}
-		// if (check_flight_status(old_multi_dim_data[i]) !== check_flight_status(new_multi_dim_data[i])) {
-
-		// 	// alert('changed');
-
-		// 	if (check_flight_status(old_multi_dim_data[i]) == 1 && check_flight_status(new_multi_dim_data[i]) == 2) {
-		// 		//flight has new destination
-		// 		//execute
-				
-		// 		constructor(new_multi_dim_data[i]);
-		// 		insert_flight_divs(new_multi_dim_data[i]);
-		// 		alert('1 to 2');
-
-		// 	} else if (check_flight_status(old_multi_dim_data[i]) == 2 && check_flight_status(new_multi_dim_data[i]) == 3) {
-		// 		//flight has just taken off
-		// 		//execute
-
-		// 		constructor(new_multi_dim_data[i]);
-		// 		var id = '#flight_2_'+new_multi_dim_data[i].flight_no+'_cont';
-		// 		alert(id);
-		// 		$(id).remove();
-				
-		// 	} else if (check_flight_status(old_multi_dim_data[i]) == 3 && check_flight_status(new_multi_dim_data[i]) == 1) {
-		// 		//flight has just landed
-		// 		//execute
-		// 		alert('3 to 1');
-
-		// 		var id = '#flight_3_'+old_multi_dim_data[i].flight_no+'_cont';
-		// 		$(id).remove();
-		// 		remove_flight_divs(new_multi_dim_data[i]);
-
-		// 	} else {
-		// 		// alert('illegal');
-		// 	}
-		// 	update_flight_dividers();
-		// }
-	}
-};
-
-//FLIGHT CHECKS & UPDATING 
-function insert_flight_divs(id_array) {
-	var f_no = id_array.flight_no;
-	var destin = id_array.flight_destination;
-	var origin = id_array.flight_origin;
-	var target_inc_flight_wrapper = '#'+destin+'_inc_flight_wrapper'
-	var target_out_flight_wrapper = '#'+origin+'_out_flight_wrapper';
-	
-	//insert destination div
-	if ($(target_inc_flight_wrapper).html() == default_inc_flight_div) {
-		$(target_inc_flight_wrapper).html('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
-	} else {
-		$(target_inc_flight_wrapper).append('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
-	};
-
-	//IF the flight is not yet airborne
-	if (id_array.location !== 'airborne') {
-		//insert origin div
-		if ($(target_out_flight_wrapper).html() == default_out_flight_div) {
-			$(target_out_flight_wrapper).html('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
-		} else {
-			$(target_out_flight_wrapper).append('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
-		};
-	}
-};
-
-function remove_flight_divs(id_array) {
-	var f_no = id_array.flight_no;
-	var destin = id_array.flight_destination;
-	var origin = id_array.flight_origin;
-	var target_inc_flight_wrapper = '#'+destin+'_inc_flight_wrapper'
-	var target_out_flight_wrapper = '#'+origin+'_out_flight_wrapper';
-
-	//remove destination div
-	$('#'+f_no+'_inc_flight_div').remove();
-	if (target_inc_flight_wrapper.html() == "") {
-		target_inc_flight_wrapper.html(default_inc_flight_div);
-	}
-
-	//remove origin div
-	$('#'+f_no+'_out_flight_div').remove();
-	if (target_out_flight_wrapper.html() == "") {
-		target_out_flight_wrapper.html(default_out_flight_div);
-	}
-};
-
-function update_flight_dividers() {
-	$('.flight_divider').remove();
-	var inc_count = 0;
-	$('#incoming_cont').children('.flight_unit').each(function(){
-		inc_count++;
-		if (inc_count % 3 == 0) {
-			$(this).after('<div class="flight_divider"></div>');
-		}
-	});
-	var out_count = 0;
-	$('#outgoing_cont').children('.flight_unit').each(function(){
-		out_count++;
-		if (out_count % 3 == 0) {
-			$(this).after('<div class="flight_divider"></div>');
-		}
-	});
-}
+let multi_dim_data = <?php echo json_encode($nested_array); ?>;
 
 
-// function check_flight_status(id_array) {
-// 	if (id_array.location_type == 'flight') {
-// 		if (id_array.flight_destination == 'nil') {
-// 			//no destination
-// 			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>1");
-// 			return 1;
-// 		} else if (id_array.location !== 'airborne') {
-// 			//has destination, not airborne
-
-// 			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>2");
-// 			return 2;
-// 		} else {
-// 			//airborne
-// 			$('#pbfs'+id_array.id).html("F.S."+id_array.id+":  <br>3");
-// 			return 3;
-// 		} 
-// 	}
-// }
-
-//RETURN ASSOCIATIVE ARRAY of flight location, origin & destination
-function get_flight_status(id_array) {
-	if (id_array.location_type == 'flight') {
-		var arr = [ id_array.location, id_array.flight_origin, id_array.flight_destination ];
-		return arr;
-	}
-}
-
-	let multi_dim_data = <?php echo json_encode($nested_array); ?>;
-	
-	// $('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
-	// 	multi_dim_data[3].location+"<br>"+
-	// 	multi_dim_data.length+
-	// 	"</div>");
-
-	var old_multi_dim_data = "";
+var old_multi_dim_data = "";
 
 // INITIAL CONSTRUCT
 
-	for (var i = 0; i < multi_dim_data.length; i++) {
-		//add divider for every 4 bases
-		if (multi_dim_data[i].location_type !== 'flight') {
-			if ((i + 1) % 8 == 0) {
-				$('#base_cont').append('<div class="base_divider"></div>');
-				constructor(multi_dim_data[i]);
-			} else {
-				constructor(multi_dim_data[i]);
-			}
-		} else {
-			//construct for flights
+for (var i = 0; i < multi_dim_data.length; i++) {
+	//add divider for every 4 bases
+	if (multi_dim_data[i].location_type !== 'flight') {
+		if ((i + 1) % 8 == 0) {
+			$('#base_cont').append('<div class="base_divider"></div>');
 			constructor(multi_dim_data[i]);
-			
-			//DISPLAY FLIGHT STATUS
-			// $('#taskbar').append("<div id='pbfs"+(i+1)+"' class='printbox'>F.S."+(i+1)+":  <br></div>");
+		} else {
+			constructor(multi_dim_data[i]);
 		}
+	} else {
+		//construct for flights
+		constructor(multi_dim_data[i]);
+		
+		//DISPLAY FLIGHT STATUS
+		// $('#taskbar').append("<div id='pbfs"+(i+1)+"' class='printbox'>F.S."+(i+1)+":  <br></div>");
 
 		//ASSUMING BASES are all constructed before flights
-		if (get_flight_status(multi_dim_data[i]) !== 1) {
-			insert_flight_divs(multi_dim_data[i]);
+		if (multi_dim_data[i].location == 'airborne') {
+			insert_base_incoming_flight_div(multi_dim_data[i]);
+		} else if (multi_dim_data[i].flight_destination !== 'nil') {
+			insert_base_outgoing_flight_div(multi_dim_data[i]);
 		}
-	}; 
-	update_flight_dividers();
+	}
+
 	
+}; 
+update_flight_dividers();
+
 // REAL TIME FUNCTIONS
-	setInterval (function(){
+setInterval (function(){
+	
+	$("#loader").load("dbt2_updater.php", function(responseText){
+		old_multi_dim_data = multi_dim_data;
+		multi_dim_data = JSON.parse(responseText);
+		update_flight_status(old_multi_dim_data, multi_dim_data);
+		update_data(multi_dim_data);
 		
-		$("#loader").load("dbt2_updater.php", function(responseText){
-			old_multi_dim_data = multi_dim_data;
-			multi_dim_data = JSON.parse(responseText);
-			update_flight_status(old_multi_dim_data, multi_dim_data);
-			update_data(multi_dim_data);
-			
-			//DISPLAY
-			$("#multi_dim_data_printbox").html("multi_dim_data_printbox: <br>"+
-			old_multi_dim_data[8].location+"<br>"+
-			multi_dim_data[8].location+
-			"</div>");
-		});
-		
+		//DISPLAY
+		$("#multi_dim_data_printbox").html("multi_dim_data_printbox: <br>"+
+		old_multi_dim_data[8].location+"<br>"+
+		multi_dim_data[8].location+
+		"</div>");
+	});
+	
 
-	}, 1000);
+}, 1000);
 
+
+// $('#taskbar').append("<div id='multi_dim_data_printbox' class='printbox'>Retrieved from dbt2: <br>"+multi_dim_data[multi_dim_data.length - 1]['location']+"<br>"+
+// 	multi_dim_data[3].location+"<br>"+
+// 	multi_dim_data.length+
+// 	"</div>");
 
 // });
 

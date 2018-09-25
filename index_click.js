@@ -19,6 +19,7 @@ function base_header_clicked(clicked) {
 	$('#console_display_title').html($(clicked).html());
 	var arr = clicked.id.split(".");
 	var base_no = parseInt(arr[0]);
+	console_base_no = base_no;
 
 	//REFRESH FLIGHT STRIPS
 	display_console_flight_strip(base_no);
@@ -51,23 +52,29 @@ function display_console_flight_strip(base_no) {
 	for (var i = 0; i < multi_dim_data.length; i++) {
 		var base_code = multi_dim_data[base_no].location;
 		if (multi_dim_data[i].location_type == 'flight') {
-			//if flight destination is target base
-			if (multi_dim_data[i].flight_destination == base_code) {
+			//if flight is airborne & flight destination is target base
+			if (multi_dim_data[i].flight_destination == base_code && multi_dim_data[i].location == 'airborne') {
 
 				$('#inc_flight_div_wrapper').append(
-					'<div class="console flight">'
+					'<div id="console_div_'
+					+multi_dim_data[i].flight_no
+					+'" class="console flight">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			//if flight location is in base w/ NO destination
 			} else if (multi_dim_data[i].location == base_code && multi_dim_data[i].flight_destination == 'nil') {
 				$('#base_flight_div_wrapper').append(
-					'<div class="console flight">'
+					'<div id="console_div_'
+					+multi_dim_data[i].flight_no
+					+'" class="console flight">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			//if flight location is in base but has destination
 			} else if (multi_dim_data[i].location == base_code && multi_dim_data[i].flight_destination !== 'nil') {
 				$('#out_flight_div_wrapper').append(
-					'<div class="console flight">'
+					'<div id="console_div_'
+					+multi_dim_data[i].flight_no
+					+'" class="console flight">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			}

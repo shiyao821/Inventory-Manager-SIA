@@ -118,7 +118,7 @@ function constructor(id_array){
 				food_menu+
 			'</div></div>';
 
-		$('#incoming_cont').append('<div id="flight_3_'+id_array.flight_no+'_cont" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#incoming_cont').append('<div id="air_flight_'+id_array.flight_no+'_unit" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
@@ -129,7 +129,7 @@ function constructor(id_array){
 				food_menu+
 			'</div></div>';
 
-		$('#outgoing_cont').append('<div id="flight_2_'+id_array.flight_no+'_cont" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#outgoing_cont').append('<div id="gnd_flight_'+id_array.flight_no+'_unit" class="flight_unit"> <div class="header mid">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
 
 	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
 		//grounded flights, not gonna be displayed
