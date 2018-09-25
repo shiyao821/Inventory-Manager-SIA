@@ -61,21 +61,21 @@ function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
 
 				//Case 1
 				if ( loc !== 'airborne' && destin == 'nil') {
-					alert('one new plane on the ground');
+					//alert('one new plane on the ground');
 				
 				//case 2
 				} else if ( loc !== 'airborne' && destin !== 'nil') {
 				
 					//insert div at origin base's outgoing
 					insert_base_outgoing_flight_div(new_multi_dim_data[i]);
-					alert('one new flight charted. plane ready for take off');
+					// alert('one new flight charted. plane ready for take off');
 				
 				//case 3
 				} else if ( loc == 'airborne' && destin !== 'nil') {
 				
 					//insert div at destination base's incoming
 					insert_base_incoming_flight_div(new_multi_dim_data[i]);
-					alert('one new flight airborne.');
+					// alert('one new flight airborne.');
 
 				} else {
 					alert('where the heck is the plane???');

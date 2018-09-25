@@ -18,6 +18,12 @@
 		<img id="img_logo" src="SIA_logo.jpg" alt="SIA logo">
 		<div id="title">Inventory Management System</div>
 		<!-- <div class="printbox">Printbox1</div> -->
+			<div id="title_holder">
+				<div id="username_display">User 1</div>
+				<div id="job_title_display">Inventory Manager</div>
+			</div>
+			<img id="portrait" src="portrait_placeholder.png">
+		
 	</div>
 	<div id="interface">
 		<div class="interface_cell">
@@ -226,7 +232,7 @@
 // $(document).ready(function() {
 var console_base_no = 1;
 
-alert('javascript working');
+// alert('javascript working');
 
 function change_val(clicked){
 	var elem_id = clicked.id;

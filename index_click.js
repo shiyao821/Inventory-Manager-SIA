@@ -5,8 +5,12 @@ function toggleDrawer(clicked) {
 };
 
 function toggleConsoleDrawer(clicked) {
+	if ($('#console').is(':hidden')) {
+		$('#interface').css("margin-bottom", "320px");
+	} else {
+		$('#interface').css("margin-bottom", "0px");
+	}
 	$('#console').slideToggle(600, "easeOutQuint");
-	  //alert($(this));
 };
 
 
@@ -37,7 +41,7 @@ function base_header_clicked(clicked) {
 
 	if ($('#console').is(':hidden')) {
 		toggleConsoleDrawer();
-	};
+	}
 }
 
 
