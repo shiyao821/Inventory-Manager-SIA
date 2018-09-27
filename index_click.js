@@ -62,7 +62,9 @@ function display_console_flight_strip(base_no) {
 				$('#inc_flight_div_wrapper').append(
 					'<div id="console_div_'
 					+multi_dim_data[i].flight_no
-					+'" class="console flight">'
+					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					+multi_dim_data[i].flight_no
+					+ '\')">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			//if flight location is in base w/ NO destination
@@ -70,7 +72,9 @@ function display_console_flight_strip(base_no) {
 				$('#base_flight_div_wrapper').append(
 					'<div id="console_div_'
 					+multi_dim_data[i].flight_no
-					+'" class="console flight">'
+					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					+multi_dim_data[i].flight_no
+					+ '\')">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			//if flight location is in base but has destination
@@ -78,7 +82,9 @@ function display_console_flight_strip(base_no) {
 				$('#out_flight_div_wrapper').append(
 					'<div id="console_div_'
 					+multi_dim_data[i].flight_no
-					+'" class="console flight">'
+					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					+multi_dim_data[i].flight_no
+					+ '\')">'
 					+multi_dim_data[i].flight_no
 					+'</div>')
 			}
