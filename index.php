@@ -47,27 +47,29 @@
 
 <div id="console" class="hidden">
 	<div id="console_base" class="hidden" onclick="">
-		<div id="console_dropper" class="clickable" onclick="toggleConsoleDrawer()">X</div>
-		<div id="console_display_title">TEST</div>
-		<div id="console_flight_strip_wrapper">
-			
-			<div id="inc_flight_strip" class="console_flight_strip">
-				<div class="console_flight_strip_name">Incoming Flights</div>
-				<div class="console_flight_div_wrapper" id="inc_flight_div_wrapper"></div>
-			</div>
-			
-			<div id="base_flight_strip" class="console_flight_strip">
-				<div class="console_flight_strip_name">Planes at Base</div>
-				<div class="console_flight_div_wrapper" id="base_flight_div_wrapper"></div>
-			</div>
+		<div id="console_dropper" class="small_button clickable_2" onclick="toggleConsoleDrawer()">X</div>
+		<div class="console_top_info_wrapper">
+			<div id="console_display_title" class="console_display_title">TEST</div>
+			<div id="console_flight_strip_wrapper">
+				
+				<div id="inc_flight_strip" class="console_flight_strip">
+					<div class="console_flight_strip_name">Incoming Flights</div>
+					<div class="console_flight_div_wrapper" id="inc_flight_div_wrapper"></div>
+				</div>
+				
+				<div id="base_flight_strip" class="console_flight_strip">
+					<div class="console_flight_strip_name">Planes at Base</div>
+					<div class="console_flight_div_wrapper" id="base_flight_div_wrapper"></div>
+				</div>
 
-			<div id="out_flight_strip" class="console_flight_strip">
-				<div class="console_flight_strip_name">Outgoing Flights</div>
-				<div class="console_flight_div_wrapper" id="out_flight_div_wrapper"></div>
-			</div>	
+				<div id="out_flight_strip" class="console_flight_strip">
+					<div class="console_flight_strip_name">Outgoing Flights</div>
+					<div class="console_flight_div_wrapper" id="out_flight_div_wrapper"></div>
+				</div>	
 
+			</div>
 		</div>
-		<div id="console_inv_table">
+		<div class="console_inv_table">
 			<div class="console_inv_category">
 				<div class="console header">Crockery</div>
 				<div class="console entry">Item Name
@@ -78,8 +80,6 @@
 					<div class="console entry">Size A Plates
 						
 						<div class="qty limit_div">
-							<!--<div id="2.size_a_plates.console_limit.edit_btn" class="console edit_btn" onclick="change_val_btn_clicked(this)"></div>-->
-
 							<span id="2.size_a_plates.console_limit" class="console data qty" ondblclick="change_val(this)" ondblclick="change_val(this)">
 								test2
 							</span>
@@ -218,11 +218,108 @@
 				</div>
 			</div>
 		</div>
+	
 	</div>
 	<div id="console_flight" class="hidden">
-		<div id="console_dropper" class="clickable" onclick="toggleConsoleDrawer()">X</div>
-		<div id="console_display_title">TEST</div>
-
+		<div class="console_top_info_wrapper">
+			<div id="console_dropper" class="small_button clickable_2" onclick="toggleConsoleDrawer()">X</div>
+			<div id="console_flight_display_title" class="console_display_title">TEST</div>
+			<div id="console_flight_status_wrapper">
+				<div id="console_flight_location" class="">Currently At</div>
+				<div id="console_flight_path" class=""> Flying from: </div>	
+			</div>
+			<div id="console_flight_status_change_btn" class="big_button clickable_2">Change Status</div>
+			
+		</div>
+		<div class="console_inv_table">
+			<div class="console_inv_category">
+				<div class="console header">Crockery</div>
+				<div class="console entry">Item Name
+					<div class="qty">Amount</div>
+				</div>
+				<div class="console_inv_col_grp">
+					<div class="console entry">Size A Plates
+						<span id="1.size_a_plates.console" class="console data qty" ondblclick="change_val(this)">
+							test
+						</span>
+						
+					</div>
+			
+					<div class="console entry">Size B Plates
+						<span id="1.size_b_plates.console" class="console data qty" ondblclick="change_val(this)">
+							test2
+						</span>
+					</div>
+			
+					<div class="console entry">Size A Bowls
+						<span id="1.size_a_bowls.console" class="console data qty" ondblclick="change_val(this)">
+							test3
+						</span>
+					</div>
+					<div style="background-color: rgb(249, 159, 28); width: 100%; text-align: center; color:black; line-height:1.5vw; border: dashed 1.5px black">Double-click the numbers above to change it!</div>
+				</div>
+			</div>
+			<div class="console_inv_category">
+				<div class="console header">Cutlery</div>
+				<div class="console entry">Item Name
+					<div class="qty">Amount</div>
+				</div>
+				<div class="console_inv_col_grp">
+					<div class="console entry">Spoons
+						<span id="1.spoons.console" class="console data qty" ondblclick="change_val(this)">
+							test
+						</span>
+					</div>
+			
+					<div class="console entry">Forks
+						<span id="1.forks.console" class="console data qty" ondblclick="change_val(this)">
+							test2
+						</span>
+					</div>
+			
+					<div class="console entry">Knives
+						<span id="1.knives.console" class="console data qty" ondblclick="change_val(this)">
+							test3
+						</span>
+					</div>
+					<div class="console entry">Dessert Spoons
+						<span id="1.dessert_spoons.console" class="console data qty" ondblclick="change_val(this)">
+							test4
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="console_inv_category">
+				<div class="console header">Food Sets</div>
+				<div class="console entry">Item Name
+					<div class="qty">Amount</div>
+				</div>
+				<div class="console_inv_col_grp">
+					<div class="console entry">Business Class - Chicken
+						<span id="1.busi_chicken.console" class="console data qty" ondblclick="change_val(this)">
+							test
+						</span>
+					</div>
+			
+					<div class="console entry">Business Class - Beef
+						<span id="1.busi_beef.console" class="console data qty" ondblclick="change_val(this)">
+							test2
+						</span>
+					</div>
+			
+					<div class="console entry">Economy Class - Chicken
+						<span id="1.econ_chicken.console" class="console data qty" ondblclick="change_val(this)">
+							test3
+						</span>
+					</div>
+					<div class="console entry">Economy Class - Fish
+						<span id="1.econ_fish.console" class="console data qty" ondblclick="change_val(this)">
+							test4
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 

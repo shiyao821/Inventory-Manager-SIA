@@ -118,18 +118,38 @@ function constructor(id_array){
 				food_menu+
 			'</div></div>';
 
-		$('#incoming_cont').append('<div id="air_flight_'+id_array.flight_no+'_unit" class="flight_unit"> <div class="clickable header mid" onclick="flight_header_clicked(this)">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#incoming_cont').append('<div id="air_flight_'
+			+ id_array.flight_no
+			+ '_unit" class="flight_unit">'
+			+ '<div class="clickable header mid" id="'
+			+ id_array.id + '.' + id_array.flight_no + '.header"'
+			+ 'onclick="flight_header_clicked(this)">'
+			+ id_array['flight_no']
+			+ '</div>' 
+			+ destination_panel 
+			+ flight_inv_menu 
+			+ '</div>')
 
 	} else if (id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] !== 'nil') {
 		//for flights preparing to take off
 
-		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="' + id_array.flight_no+'_inv_drawer" class="header clickable" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
+		var flight_inv_menu = '<div class="dropdown_wrapper"> <div id="'+ id_array.flight_no+'_inv_drawer" class="header clickable" onclick="toggleDrawer(this)"><span>Flight Inventory</span> </div><div class="wrapper hidden">'+
 				crockery_menu+
 				cutlery_menu+
 				food_menu+
 			'</div></div>';
 
-		$('#outgoing_cont').append('<div id="gnd_flight_'+id_array.flight_no+'_unit" class="flight_unit"> <div class="clickable header mid" onclick="flight_header_clicked(this)">' + id_array['flight_no'] + '</div>' + destination_panel + flight_inv_menu + '</div>')
+		$('#outgoing_cont').append('<div id="gnd_flight_'
+			+ id_array.flight_no
+			+ '_unit" class="flight_unit">'
+			+ '<div class="clickable header mid" id="'
+			+ id_array.id + '.' + id_array.flight_no + '.header"'
+			+ 'onclick="flight_header_clicked(this)">' 
+			+ id_array['flight_no'] 
+			+ '</div>' 
+			+ destination_panel 
+			+ flight_inv_menu 
+			+ '</div>')
 
 	} else if ((id_array['location_type'] == 'flight' && id_array['location'] !== 'airborne' && id_array['flight_origin'] == 'nil')) {
 		//grounded flights, not gonna be displayed

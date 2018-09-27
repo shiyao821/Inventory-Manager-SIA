@@ -23,9 +23,12 @@ function base_header_clicked(clicked) {
 	if ($('#console_base').is(':hidden')) {
 		$('#console_base').removeClass('hidden');
 		$('#console_flight').addClass('hidden')
-	} else {
+	} 
+	if ($('#console').is(':hidden')) {
+		toggleConsoleDrawer();
 	}
 
+	//DISPLAY TITLE
 	$('#console_display_title').html($(clicked).html());
 	var arr = clicked.id.split(".");
 	var base_no = parseInt(arr[0]);
@@ -45,25 +48,36 @@ function base_header_clicked(clicked) {
 		}
 	});
 	
-	if ($('#console').is(':hidden')) {
-		toggleConsoleDrawer();
-	}
 }
 
 function flight_header_clicked(clicked) {
 	if ($('#console_flight').is(':hidden')) {
 		$('#console_flight').removeClass('hidden');
 		$('#console_base').addClass('hidden')
-	} else {
-		
 	}
-
-	//LOAD flight details	
-
 	if ($('#console').is(':hidden')) {
 		toggleConsoleDrawer();
 	}
+	//DISPLAY TITLE
+	$('#console_flight_display_title').html($(clicked).html());
+	var arr = clicked.id.split(".");
+	var id_no = parseInt(arr[0]);
+	console_flight_no = id_no;
 
+	//REPLACE DATA VALUES
+	$('span.console.data').each(function(){
+		var arr2 = this.id.split(".");
+		this.id = id_no + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];
+	});
+
+	//DISPLAY FLIGHT STATUS
+	var flight_array = multi_dim_data[id_no - 1];
+	$('#console_flight_location').html('CURRENT LOCATION:  ' + flight_array.location);
+	$('#console_flight_path').html(
+		'FLYING FROM:  '
+		+ flight_array.flight_origin
+		+ ' TO '
+		+ flight_array.flight_destination);
 }
 
 //BASE CLICKS

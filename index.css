@@ -260,7 +260,7 @@ p{
 }
 
 #console_flight {
-	background-color:rgb(100, 138, 207);
+	background-color:rgb(0, 38, 67);
 	color:rgb(235, 238, 244);
 	width:100%;
 	height:100%;
@@ -268,8 +268,8 @@ p{
 	z-index:2;
 }
 
-#console_display_title{
-	width: 12vw;
+.console_display_title{
+	width: 18vw;
 	font-size: 70px;
 	font-weight: bold;
 	margin-left: 6vw;
@@ -277,9 +277,7 @@ p{
 }
 
 #console_flight_strip_wrapper {
-	margin-left: 6vw;
 	float: left;
-	margin-bottom: 20px;
 	width: 70vw;
 }
 
@@ -305,10 +303,15 @@ p{
 	float: left;
 }
 
-#console_inv_table{
+.console_top_info_wrapper {
+	height:130px;
+	width: 100%;
+}
+
+.console_inv_table{
 	display: table;
 	height: 180px;
-	/*border: dashed 1px gray;*/
+	
 	width: 90%;
 	margin: auto;
 }
@@ -322,15 +325,9 @@ p{
 }
 
 #console_dropper {
-	height:30px;
-	width: 30px;
-	margin-right: 20px;
-	background-color: rgb(249, 159, 28);
 	float: right;
-	color: black;
 	padding-top:5px;
-	padding-left: 10px;
-	font-size: 24px;
+	padding-left: 13px;
 }
 
 .limit_div{
@@ -344,17 +341,17 @@ input{
 	float: right;
 }
 
+.test{
+	min-width: 20px;
+	min-height: 20px;
+	border: dashed 1px gray;
+}
+
 .edit_btn{
 	height:1.5vw;
 	width: 1.5vw;
 	background-color: rgb(249, 159, 28);
 	float: right;
-}
-
-.clickable:hover{
-	color: rgb(100, 138, 207);
-	cursor: pointer;
-	border-color: rgb(100, 138, 207);
 }
 
 .console.header {
@@ -364,4 +361,49 @@ input{
 }
 .console.entry {
 	border-bottom-style: solid;
+}
+#console_flight_status_wrapper {
+	float:left;
+	width: 50vw;
+}
+
+#console_flight_location {
+	line-height: 3vw;
+}
+#console_flight_path {
+	line-height: 3vw;
+}
+#console_flight_status_change_btn {
+	float: left;
+}
+
+.small_button {
+	height:30px;
+	width: 30px;
+	margin-right: 20px;
+	color: black;
+	font-size: 24px;
+	background-color: rgb(249, 159, 28);
+}
+
+.big_button {
+	width: 10vw;
+	margin-left:4vw;
+	line-height: 6vw;
+	border-radius: 8px;
+	text-align: center;
+	color: black;
+	background-color: rgb(249, 159, 28);
+}
+
+.clickable:hover{
+	color: rgb(100, 138, 207);
+	cursor: pointer;
+	border-color: rgb(100, 138, 207);
+}
+
+.clickable_2:hover{
+	color: white;
+	cursor: pointer;
+	background-color: rgb(249, 100, 40);
 }
