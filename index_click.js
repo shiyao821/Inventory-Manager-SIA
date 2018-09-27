@@ -20,6 +20,12 @@ function flight_entry_redirect(flight_no) {
 };
 
 function base_header_clicked(clicked) {
+	if ($('#console_base').is(':hidden')) {
+		$('#console_base').removeClass('hidden');
+		$('#console_flight').addClass('hidden')
+	} else {
+	}
+
 	$('#console_display_title').html($(clicked).html());
 	var arr = clicked.id.split(".");
 	var base_no = parseInt(arr[0]);
@@ -38,12 +44,27 @@ function base_header_clicked(clicked) {
 			this.id = base_no + '.' + arr2[arr2.length - 2] + '.' + arr2[arr2.length - 1];
 		}
 	});
-
+	
 	if ($('#console').is(':hidden')) {
 		toggleConsoleDrawer();
 	}
 }
 
+function flight_header_clicked(clicked) {
+	if ($('#console_flight').is(':hidden')) {
+		$('#console_flight').removeClass('hidden');
+		$('#console_base').addClass('hidden')
+	} else {
+		
+	}
+
+	//LOAD flight details	
+
+	if ($('#console').is(':hidden')) {
+		toggleConsoleDrawer();
+	}
+
+}
 
 //BASE CLICKS
 function display_console_flight_strip(base_no) {
