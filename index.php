@@ -112,7 +112,7 @@
 							test3
 						</span>
 					</div>
-					<div style="background-color: rgb(249, 159, 28); width: 100%; text-align: center; color:black; line-height:1.5vw; border: dashed 1.5px black">Double-click the numbers above to change it!</div>
+					<!-- <div style="background-color: rgb(249, 159, 28); width: 100%; text-align: center; color:black; line-height:1.5vw; border: dashed 1.5px black">Double-click the numbers above to change it!</div> -->
 				</div>
 			</div>
 			<div class="console_inv_category">
@@ -257,7 +257,7 @@
 							test3
 						</span>
 					</div>
-					<div style="background-color: rgb(249, 159, 28); width: 100%; text-align: center; color:black; line-height:1.5vw; border: dashed 1.5px black">Double-click the numbers above to change it!</div>
+					<!-- <div style="background-color: rgb(249, 159, 28); width: 100%; text-align: center; color:black; line-height:1.5vw; border: dashed 1.5px black">Double-click the numbers above to change it!</div> -->
 				</div>
 			</div>
 			<div class="console_inv_category">

@@ -95,6 +95,7 @@ function update_flight_status(old_multi_dim_data, new_multi_dim_data) {
 
 //insert div at destination base's incoming
 function insert_base_incoming_flight_div(id_array) {
+	var row_no = id_array.id;
 	var f_no = id_array.flight_no;
 	var destin = id_array.flight_destination;
 	var origin = id_array.flight_origin;
@@ -103,14 +104,15 @@ function insert_base_incoming_flight_div(id_array) {
 	
 	//insert destination div
 	if ($(target_inc_flight_wrapper).html() == default_inc_flight_div) {
-		$(target_inc_flight_wrapper).html('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
+		$(target_inc_flight_wrapper).html('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect('+row_no+', \''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
 	} else {
-		$(target_inc_flight_wrapper).append('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
+		$(target_inc_flight_wrapper).append('<div id="'+f_no+'_inc_flight_div" class="clickable flight entry" onclick="flight_entry_redirect('+row_no+', \''+f_no+'\')">'+f_no+'<span class="qty">FROM : '+origin+'</span></div>')
 	};
 }
 
 //insert div at origin base's outgoing
 function insert_base_outgoing_flight_div(id_array) {
+	var row_no = id_array.id;
 	var f_no = id_array.flight_no;
 	var destin = id_array.flight_destination;
 	var origin = id_array.flight_origin;
@@ -118,9 +120,9 @@ function insert_base_outgoing_flight_div(id_array) {
 	var target_out_flight_wrapper = '#'+origin+'_out_flight_wrapper';
 
 	if ($(target_out_flight_wrapper).html() == default_out_flight_div) {
-		$(target_out_flight_wrapper).html('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
+		$(target_out_flight_wrapper).html('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect('+row_no+', \''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
 	} else {
-		$(target_out_flight_wrapper).append('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect(\''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
+		$(target_out_flight_wrapper).append('<div id="'+f_no+'_out_flight_div" class="clickable flight entry" onclick="flight_entry_redirect('+row_no+', \''+f_no+'\')">'+f_no+'<span class="qty">TO   : '+destin+'</span></div>')
 	};
 };
 

@@ -14,9 +14,10 @@ function toggleConsoleDrawer(clicked) {
 };
 
 
-function flight_entry_redirect(flight_no) {
+function flight_entry_redirect(row_no, flight_no) {
 	toggleDrawer($('#'+flight_no+'_inv_drawer'));
-	//alert('clicked');
+	// alert('#'+row_no+'.'+flight_no+'.header');
+	display_flight_console (row_no, flight_no);
 };
 
 function base_header_clicked(clicked) {
@@ -51,6 +52,11 @@ function base_header_clicked(clicked) {
 }
 
 function flight_header_clicked(clicked) {
+	var arr = clicked.id.split(".");
+	var id_no = parseInt(arr[0]);
+	display_flight_console(id_no, $(clicked).html());
+}
+function display_flight_console (id_no, title) {
 	if ($('#console_flight').is(':hidden')) {
 		$('#console_flight').removeClass('hidden');
 		$('#console_base').addClass('hidden')
@@ -58,11 +64,10 @@ function flight_header_clicked(clicked) {
 	if ($('#console').is(':hidden')) {
 		toggleConsoleDrawer();
 	}
-	//DISPLAY TITLE
-	$('#console_flight_display_title').html($(clicked).html());
-	var arr = clicked.id.split(".");
-	var id_no = parseInt(arr[0]);
 	console_flight_no = id_no;
+
+	//DISPLAY TITLE
+	$('#console_flight_display_title').html(title);
 
 	//REPLACE DATA VALUES
 	$('span.console.data').each(function(){
@@ -72,12 +77,27 @@ function flight_header_clicked(clicked) {
 
 	//DISPLAY FLIGHT STATUS
 	var flight_array = multi_dim_data[id_no - 1];
-	$('#console_flight_location').html('CURRENT LOCATION:  ' + flight_array.location);
-	$('#console_flight_path').html(
-		'FLYING FROM:  '
-		+ flight_array.flight_origin
-		+ ' TO '
-		+ flight_array.flight_destination);
+	if (flight_array.location == 'airborne') {
+		$('#console_flight_location').html('CURRENTLY EN ROUTE TO: <span class="emph incoming">'
+			+ flight_array.flight_destination + '</span>');
+		$('#console_flight_path').html('ORIGIN: <span class="emph outgoing">'
+			+ flight_array.flight_origin + '</span>');
+	} else if (flight_array.location !== 'airborne' && flight_array.flight_destination !== 'nil') {
+		$('#console_flight_location').html('PREPARING FOR TAKE OFF FROM: <span class="emph outgoing">'
+			+ flight_array.flight_origin + '</span>');
+		$('#console_flight_path').html('DESTINATION: <span class="emph incoming">'
+			+ flight_array.flight_destination + '</span>');
+	} else {
+		$('#console_flight_location').html('CURRENTLY PARKED AT: <span class="emph">'
+			+ flight_array.location + '</span>');
+		$('#console_flight_path').html('');
+	}
+
+	// $('#console_flight_path').html(
+	// 	'FLYING FROM:  '
+	// 	+ flight_array.flight_origin
+	// 	+ ' TO '
+	// 	+ flight_array.flight_destination);
 }
 
 //BASE CLICKS
@@ -95,9 +115,9 @@ function display_console_flight_strip(base_no) {
 			if (multi_dim_data[i].flight_destination == base_code && multi_dim_data[i].location == 'airborne') {
 
 				$('#inc_flight_div_wrapper').append(
-					'<div id="console_div_'
-					+multi_dim_data[i].flight_no
-					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					'<div id="'
+					+ (i + 1) + '.' + multi_dim_data[i].flight_no + '.console_div'
+					+'" class="console flight clickable" onclick="flight_entry_redirect('+(i + 1)+', \''
 					+multi_dim_data[i].flight_no
 					+ '\')">'
 					+multi_dim_data[i].flight_no
@@ -105,9 +125,9 @@ function display_console_flight_strip(base_no) {
 			//if flight location is in base w/ NO destination
 			} else if (multi_dim_data[i].location == base_code && multi_dim_data[i].flight_destination == 'nil') {
 				$('#base_flight_div_wrapper').append(
-					'<div id="console_div_'
-					+multi_dim_data[i].flight_no
-					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					'<div id="'
+					+ (i + 1) + '.' + multi_dim_data[i].flight_no + '.console_div'
+					+'" class="console flight clickable" onclick="flight_entry_redirect('+(i + 1)+', \''
 					+multi_dim_data[i].flight_no
 					+ '\')">'
 					+multi_dim_data[i].flight_no
@@ -115,9 +135,9 @@ function display_console_flight_strip(base_no) {
 			//if flight location is in base but has destination
 			} else if (multi_dim_data[i].location == base_code && multi_dim_data[i].flight_destination !== 'nil') {
 				$('#out_flight_div_wrapper').append(
-					'<div id="console_div_'
-					+multi_dim_data[i].flight_no
-					+'" class="console flight clickable" onclick="flight_entry_redirect(\''
+					'<div id="'
+					+ (i + 1) + '.' + multi_dim_data[i].flight_no + '.console_div'
+					+'" class="console flight clickable" onclick="flight_entry_redirect('+(i + 1)+', \''
 					+multi_dim_data[i].flight_no
 					+ '\')">'
 					+multi_dim_data[i].flight_no
@@ -185,7 +205,7 @@ function change_flight_status(clicked) {
 				origin: new_origin,
 				destin: new_destin
 			}, function(data, status) {
-				alert(data + status);
+				// alert(data + status);
 			//redisplay everything again:
 			toggleConsoleDrawer();
 		});

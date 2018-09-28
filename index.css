@@ -89,7 +89,7 @@ p{
 	display: block;
 	margin: 0 auto;
 	width: 85%;
-	border-bottom: solid 1px rgb(187, 129, 48);
+	border-bottom: solid 1px rgb(127, 79, 48);
 }
 .mid {
 	text-align:center;
@@ -448,4 +448,8 @@ p{
 	margin-left: 1vw;
 	font-size: 80%;
 	font-style: italic;
+}
+.emph {
+	font-size: 26px;
+	font-weight: bold;
 }
