@@ -336,7 +336,7 @@ p{
 	float: right;
 }
 
-input{
+#changing{
 	width: 60px;
 	float: right;
 }
@@ -375,6 +375,8 @@ input{
 }
 #console_flight_status_change_btn {
 	float: left;
+	margin-left:4vw;
+	font-size: 16px;
 }
 
 .small_button {
@@ -388,12 +390,12 @@ input{
 
 .big_button {
 	width: 10vw;
-	margin-left:4vw;
 	line-height: 6vw;
 	border-radius: 8px;
 	text-align: center;
 	color: black;
 	background-color: rgb(249, 159, 28);
+	font-size: 20px;
 }
 
 .clickable:hover{
@@ -406,4 +408,44 @@ input{
 	color: white;
 	cursor: pointer;
 	background-color: rgb(249, 100, 40);
+}
+
+.changebox {
+	width: 50vw;
+	height: 6vw;
+	color: black;
+	border-radius: 5px;
+}
+.input_strip{
+	vertical-align: middle;
+	width: 38vw;
+	height: 2vw;
+	background-color: rgb(249, 159, 28);
+	border: dashed 1px black;
+}
+.input_strip_wrapper {
+	float: left;
+}
+.input_name {
+	line-height: 2vw;
+	width:10vw;
+	float: left;
+	margin-left: 2vw;
+}
+.input_box{
+	margin-top: 1px;
+	line-height:1.5vw;	
+}
+#submit_button {
+	float: left;
+	margin-left:4vw;
+}
+#cancel_button {
+	float:right;	
+}
+
+.show_current {
+	margin-left: 1vw;
+	font-size: 80%;
+	font-style: italic;
 }

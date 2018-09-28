@@ -132,3 +132,63 @@ function change_val_btn_clicked(clicked){
 	change_val(next_elem_id);
 	// change_val($(clicked).next().html(clicked.id));
 }
+
+function change_flight_status(clicked) {
+	var status = get_flight_status(multi_dim_data[console_flight_no - 1]);
+	var f_no = status[0];
+	var loc = status[1];
+	var origin = status[2];
+	var destin = status[3];
+
+	var holder = $('#console_flight_status_wrapper').html();
+	var replacement = '<div class="changebox">'
+	+ '<div class="input_strip_wrapper">'
+	+ '<div class="input_strip">'
+	+ '<div class="input_name">New Location : </div>'
+	+ '<input id="input_loc" class="input_box" type="text" placeholder="IATA code or \'airborne\'" />'
+	+ '<span class="show_current">Currently : ' + loc + '</span>'
+	+ '</div>'
+	+ '<div class="input_strip">'
+	+ '<div class="input_name">New Origin : </div>'
+	+ '<input id="input_origin" class="input_box" type="text" placeholder="IATA code or \'nil\'" />'
+	+ '<span class="show_current">Currently : ' + origin + '</span>'
+	+ '</div>'
+	+ '<div class="input_strip">'
+	+ '<div class="input_name">New Destination : </div>'
+	+ '<input id="input_destin" class="input_box" type="text" placeholder="IATA code or \'nil\'" />'	
+	+ '<span class="show_current">Currently : ' + destin + '</span>'
+	+ '</div>'
+	+ '</div>'
+	+ '<div id="cancel_button" class="big_button clickable_2">CANCEL</div>'
+	+ '</div>';
+	$('#console_flight_status_wrapper').html(replacement);
+
+	$(clicked).replaceWith('<div id="submit_button" class="big_button clickable_2">CONFIRM</div>');
+	// $('.input_box').focus();\
+	$('#cancel_button').click(function(event){
+		$('#console_flight_status_wrapper').html(holder);
+		$('#submit_button').replaceWith(clicked);
+	})
+
+	$('#submit_button').click(function(event) {
+		// alert($('.input_box').val());
+		var new_loc = $('#input_loc').val().trim();
+		var new_origin = $('#input_origin').val().trim();
+		var new_destin = $('#input_destin').val().trim();
+		$('#console_flight_status_wrapper').html(holder);
+		$('#submit_button').replaceWith(clicked);
+
+		//Change Database Data
+		$.post("dbt2_edit_flight.php", {
+				row_no: console_flight_no,
+				location: new_loc,
+				origin: new_origin,
+				destin: new_destin
+			}, function(data, status) {
+				alert(data + status);
+			//redisplay everything again:
+			toggleConsoleDrawer();
+		});
+	})
+}
+	

@@ -218,7 +218,8 @@
 				</div>
 			</div>
 		</div>
-	
+
+<!--===========================================================FLIGHT CONSOLE CONTENTS-->
 	</div>
 	<div id="console_flight" class="hidden">
 		<div class="console_top_info_wrapper">
@@ -228,7 +229,7 @@
 				<div id="console_flight_location" class="">Currently At</div>
 				<div id="console_flight_path" class=""> Flying from: </div>	
 			</div>
-			<div id="console_flight_status_change_btn" class="big_button clickable_2">Change Status</div>
+			<div id="console_flight_status_change_btn" class="big_button clickable_2" onclick="change_flight_status(this)">Change Status</div>
 			
 		</div>
 		<div class="console_inv_table">
